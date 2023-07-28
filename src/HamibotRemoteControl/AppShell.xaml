@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="HamibotRemoteControl.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:HamibotRemoteControl"
+       Shell.FlyoutBehavior="Flyout">
+
+    <Shell.FlyoutHeader>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="Center"
+                     MinimumHeightRequest="200">
+            <!--<Image Source="Resources/Images/logo.png"
+                   WidthRequest="100"
+                   HeightRequest="100"
+                   Margin="0,30,0,15" />-->
+            <Label Text="Hamibot遥控器"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="20"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="Center"
+                     Margin="20,25">
+            <Label x:Name="version"
+                   HorizontalOptions="End" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+    <ShellContent Title="Home1"
+                  ContentTemplate="{DataTemplate local:MainPage}"
+                  Route="MainPage" />
+    <ShellContent Title="Home2"
+                  ContentTemplate="{DataTemplate local:MainPage}"
+                  Route="MainPage" />
+
+</Shell>
