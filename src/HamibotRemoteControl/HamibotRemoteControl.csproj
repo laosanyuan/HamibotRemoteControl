@@ -53,13 +53,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Converters\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="Autofac" Version="7.0.1" />
 	  <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+	  <PackageReference Include="SQLite" Version="3.13.0" />
 	</ItemGroup>
 
 	<ItemGroup>

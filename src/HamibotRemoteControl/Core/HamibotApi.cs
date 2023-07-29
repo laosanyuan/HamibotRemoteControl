@@ -83,7 +83,13 @@ namespace HamibotRemoteControl.Core
                 var response = await _client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
-                    return JsonSerializer.Deserialize<ScriptCollection>(response.Json)?.Items;
+                    var result = JsonSerializer.Deserialize<ScriptCollection>(response.Json)?.Items;
+                    if (type == ScriptType.Developer)
+                    {
+                        result?.ForEach(t => t.Type = ScriptType.Developer);
+                    }
+
+                    return result;
                 }
             }
             return default;

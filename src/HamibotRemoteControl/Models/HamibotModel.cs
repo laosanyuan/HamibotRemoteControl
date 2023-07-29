@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using HamibotRemoteControl.Enums;
+using System.Text.Json.Serialization;
 
 namespace HamibotRemoteControl.Models
 {
@@ -15,26 +17,37 @@ namespace HamibotRemoteControl.Models
     }
 
     /// <summary>
-    /// 脚本基本信息
-    /// </summary>
-    public class BaseScript
-    {
-        [JsonPropertyName("_id")]
-        public string Id { get; set; }
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-    }
-
-    /// <summary>
     /// 脚本信息
     /// </summary>
-    public class Script : BaseScript
+    [ObservableObject]
+    public partial class Script
     {
-
+        /// <summary>
+        /// id
+        /// </summary>
+        [JsonPropertyName("_id")]
+        public string Id { get; set; }
+        /// <summary>
+        /// 脚本名
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        /// <summary>
+        /// 脚本作者
+        /// </summary>
         [JsonPropertyName("slug")]
         public string Author { get; set; }
+        /// <summary>
+        /// 脚本本版号
+        /// </summary>
         [JsonPropertyName("version")]
         public string Version { get; set; }
+
+        /// <summary>
+        /// 脚本类别
+        /// </summary>
+        [JsonIgnore]
+        public ScriptType Type { get; set; }
     }
     #endregion
 
@@ -64,18 +77,45 @@ namespace HamibotRemoteControl.Models
     /// <summary>
     /// 机器人
     /// </summary>
-    public class Robot : BaseRobot
+    [ObservableObject]
+    public partial class Robot : BaseRobot
     {
+        /// <summary>
+        /// 是否在线
+        /// </summary>
         [JsonPropertyName("online")]
         public bool Online { get; set; }
+        /// <summary>
+        /// 标签
+        /// </summary>
         [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }
+        /// <summary>
+        /// 手机品牌
+        /// </summary>
         [JsonPropertyName("brand")]
         public string Brand { get; set; }
+        /// <summary>
+        /// 手机型号
+        /// </summary>
         [JsonPropertyName("model")]
         public string Model { get; set; }
+        /// <summary>
+        /// Hamibot版本号
+        /// </summary>
         [JsonPropertyName("appVersion")]
         public string AppVersion { get; set; }
+
+        /// <summary>
+        /// 是否被用户选中
+        /// </summary>
+        [JsonIgnore]
+        public bool IsSelected { get; set; } = true;
+        /// <summary>
+        /// 是否被用户隐藏
+        /// </summary>
+        [JsonIgnore]
+        public bool IsHidden { get; set; }
     }
 
     /// <summary>

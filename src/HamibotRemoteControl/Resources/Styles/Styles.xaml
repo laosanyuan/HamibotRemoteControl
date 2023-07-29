@@ -25,4 +25,22 @@
         <Setter Property="Shell.TabBarUnselectedColor"
                 Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
     </Style>
+
+
+    <Style TargetType="Button"
+           ApplyToDerivedTypes="True">
+        <Setter Property="Background"
+                Value="{StaticResource BackgroundColor.Secondary}" />
+        <Setter Property="CornerRadius"
+                Value="5" />
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="TextColor"
+                Value="{StaticResource Foreground.Primary}" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource Foreground.Primary}" />
+    </Style>
 </ResourceDictionary>

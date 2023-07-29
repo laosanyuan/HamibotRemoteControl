@@ -1,14 +1,15 @@
 ﻿namespace HamibotRemoteControl.Enums
 {
+    [Flags]
     public enum ScriptType
     {
         /// <summary>
         /// 常规
         /// </summary>
-        Common,
+        Common = 0x01,
         /// <summary>
         /// 开发者
         /// </summary>
-        Developer
+        Developer = 0x10,
     }
 }

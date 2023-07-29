@@ -2,11 +2,105 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HamibotRemoteControl.Views.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BindingContext="{Binding Source={StaticResource Locator},Path=SettingsPage}"
+             xmlns:converter="clr-namespace:HamibotRemoteControl.Converters"
+             xmlns:local="clr-namespace:HamibotRemoteControl.Views"
+             Background="{StaticResource BackgroundColor.Primary}"
+             Title="设置">
+    <ContentPage.Resources>
+        <converter:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        <local:BooleanTextConverter x:Key="BooleanTextConverter" />
+        <local:ScriptTypeTextConverter x:Key="ScriptTypeTextConverter" />
+    </ContentPage.Resources>
+    <Grid>
+        <!--展示配置内容-->
+        <Grid IsVisible="{Binding IsSetting,Converter={StaticResource ReverseBooleanConverter}}">
+            <VerticalStackLayout Margin="40,60,40,0"
+                                 IsVisible="{Binding IsValid}">
+                <Label Text="Hamibot令牌："
+                       FontSize="20"
+                       Margin="0,0,0,5" />
+                <Label Text="{Binding Token}"
+                       FontSize="15"
+                       TextColor="{StaticResource Foreground.Primary}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Label Text="{Binding AutoRefresh,Converter={StaticResource BooleanTextConverter},StringFormat='是否自动刷新：{0}'}"
+                       FontSize="20"
+                       Margin="0,25" />
+                <Label Text="{Binding ScriptType,Converter={StaticResource ScriptTypeTextConverter},StringFormat='脚本类型：{0}'}"
+                       FontSize="20" />
+            </VerticalStackLayout>
+            <Label Text="请进行首次使用设置"
+                   Margin="0,200,0,0"
+                   HorizontalOptions="Center"
+                   FontSize="20"
+                   TextColor="{StaticResource Foreground.Primary}"
+                   IsVisible="{Binding IsValid,Converter={StaticResource ReverseBooleanConverter}}" />
+
+            <Button Text="设置"
+                    HeightRequest="50"
+                    WidthRequest="200"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Margin="0,0,0,30"
+                    Command="{Binding ModifyCommand}" />
+        </Grid>
+
+        <!--配置过程-->
+        <Grid IsVisible="{Binding IsSetting}">
+            <VerticalStackLayout Margin="40,60,40,0">
+                <Label Text="Hamibot令牌"
+                       FontSize="20" />
+                <Editor FontSize="25"
+                        TextColor="{StaticResource Foreground.Primary}"
+                        Text="{Binding Token, Mode=TwoWay}"
+                        AutoSize="TextChanges" />
+
+                <HorizontalStackLayout Margin="0,30">
+                    <Label Text="开启自动刷新"
+                           VerticalOptions="Center"
+                           FontSize="20" />
+                    <CheckBox HorizontalOptions="Start"
+                              VerticalOptions="Center"
+                              Margin="10,3,0,0"
+                              IsChecked="{Binding AutoRefresh}" />
+                </HorizontalStackLayout>
+
+                <Label Text="使用脚本类型"
+                       FontSize="20" />
+                <Picker SelectedItem="{Binding ScriptType,Converter={StaticResource ScriptTypeTextConverter},Mode=TwoWay}"
+                        TextColor="{StaticResource Foreground.Primary}"
+                        FontSize="20">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>常规脚本</x:String>
+                            <x:String>开发者脚本</x:String>
+                            <x:String>常规脚本+开发者脚本</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+
+            <Grid Margin="20,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Text="取消"
+                        HeightRequest="50"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        VerticalOptions="End"
+                        Command="{Binding CancelCommand}" />
+                <Button Text="保存"
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        VerticalOptions="End"
+                        Command="{Binding SaveCommand}" />
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>
