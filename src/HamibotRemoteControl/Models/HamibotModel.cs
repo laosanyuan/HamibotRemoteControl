@@ -81,8 +81,6 @@ namespace HamibotRemoteControl.Models
     /// <summary>
     /// 修改机器人信息
     /// </summary>
-    /// <param name="Name"></param>
-    /// <param name="tags"></param>
     public class ModifyRobot
     {
         [JsonPropertyName("name")]
