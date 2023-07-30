@@ -2,23 +2,24 @@
 <Shell x:Class="HamibotRemoteControl.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:HamibotRemoteControl"
        xmlns:views="clr-namespace:HamibotRemoteControl.Views"
-       Shell.FlyoutBehavior="Flyout">
-
+       Background="{StaticResource BackgroundColor.Primary}"
+       FlyoutBehavior="Flyout">
     <Shell.FlyoutHeader>
         <StackLayout Orientation="Vertical"
                      VerticalOptions="Center"
                      MinimumHeightRequest="200">
-            <!--<Image Source="Resources/Images/logo.png"
+            <Image Source="Resources/Images/logo.png"
                    WidthRequest="100"
                    HeightRequest="100"
-                   Margin="0,30,0,15" />-->
+                   Margin="0,30,0,15" />
             <Label Text="Hamibot遥控器"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
+                   Margin="0,20"
                    FontAttributes="Bold"
-                   FontSize="20"/>
+                   TextColor="{StaticResource BackgroundColor.Primary}"
+                   FontSize="20" />
         </StackLayout>
     </Shell.FlyoutHeader>
 
@@ -27,27 +28,36 @@
                      VerticalOptions="Center"
                      Margin="20,25">
             <Label x:Name="version"
-                   HorizontalOptions="End" />
+                   HorizontalOptions="End"
+                   TextColor="{StaticResource BackgroundColor.Primary}" />
         </StackLayout>
     </Shell.FlyoutFooter>
 
     <ShellContent Title="首页"
                   ContentTemplate="{DataTemplate views:MainPage}"
-                  Route="MainPage" />
+                  Route="MainPage"
+                  Icon="Resources/Images/Icons/home.png" />
+
     <!--<ShellContent Title="机器人管理"
                   ContentTemplate="{DataTemplate views:RobotManagePage}"
-                  Route="RobotManagePage" />
+                  Route="RobotManagePage"
+                  Icon="Resources/Images/Icons/robot.png" />
     <ShellContent Title="脚本管理"
                   ContentTemplate="{DataTemplate views:ScriptManagePage}"
-                  Route="ScriptManagePage" />
+                  Route="ScriptManagePage"
+                  Icon="Resources/Images/Icons/script.png" />
     <ShellContent Title="数据统计"
                   ContentTemplate="{DataTemplate views:DataStatisticsPage}"
-                  Route="DataStatisticsPage" />-->
+                  Route="DataStatisticsPage"
+                  Icon="Resources/Images/Icons/data.png" />-->
+
     <ShellContent Title="设置"
                   ContentTemplate="{DataTemplate views:SettingsPage}"
-                  Route="SettingsPage" />
+                  Route="SettingsPage"
+                  Icon="Resources/Images/Icons/set.png" />
     <ShellContent Title="关于"
                   ContentTemplate="{DataTemplate views:AboutPage}"
-                  Route="AboutPage" />
+                  Route="AboutPage"
+                  Icon="Resources/Images/Icons/about.png" />
 
 </Shell>

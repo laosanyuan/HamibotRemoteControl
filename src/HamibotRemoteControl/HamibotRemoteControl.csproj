@@ -45,11 +45,26 @@
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\iconfont.ttf" />
+	  <None Remove="Resources\Icons\about.png" />
+	  <None Remove="Resources\Icons\data.png" />
+	  <None Remove="Resources\Icons\home.png" />
+	  <None Remove="Resources\Icons\robot.png" />
+	  <None Remove="Resources\Icons\script.png" />
+	  <None Remove="Resources\Icons\set.png" />
+	  <None Remove="Resources\logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Icons\about.png" />
+	  <MauiImage Include="Resources\Icons\data.png" />
+	  <MauiImage Include="Resources\Icons\robot.png" />
+	  <MauiImage Include="Resources\Icons\script.png" />
+	  <MauiImage Include="Resources\Icons\set.png" />
+	  <MauiImage Include="Resources\Icons\home.png" />
 	</ItemGroup>
 
 	<ItemGroup>
