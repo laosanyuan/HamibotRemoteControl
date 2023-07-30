@@ -34,7 +34,7 @@
     <ShellContent Title="首页"
                   ContentTemplate="{DataTemplate views:MainPage}"
                   Route="MainPage" />
-    <ShellContent Title="机器人管理"
+    <!--<ShellContent Title="机器人管理"
                   ContentTemplate="{DataTemplate views:RobotManagePage}"
                   Route="RobotManagePage" />
     <ShellContent Title="脚本管理"
@@ -42,7 +42,7 @@
                   Route="ScriptManagePage" />
     <ShellContent Title="数据统计"
                   ContentTemplate="{DataTemplate views:DataStatisticsPage}"
-                  Route="DataStatisticsPage" />
+                  Route="DataStatisticsPage" />-->
     <ShellContent Title="设置"
                   ContentTemplate="{DataTemplate views:SettingsPage}"
                   Route="SettingsPage" />

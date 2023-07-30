@@ -2,10 +2,12 @@
 using CommunityToolkit.Mvvm.Input;
 using HamibotRemoteControl.Models;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Messaging;
 using HamibotRemoteControl.Core;
 using HamibotRemoteControl.Core.ConfigManagers;
 using HamibotRemoteControl.Enums;
 using HamibotRemoteControl.Common;
+using HamibotRemoteControl.Tools;
 
 namespace HamibotRemoteControl.ViewModels
 {
@@ -50,17 +52,9 @@ namespace HamibotRemoteControl.ViewModels
 
         public MainPageViewModel()
         {
-            Task.Run(async () =>
-            {
-                //this.IsAutoRefresh = UserCenter.Instance.AutoRefresh;
-                this.Robots = new ObservableCollection<Robot>(await RobotManager.Load());
-                this.Scripts = new ObservableCollection<Script>(await ScriptManager.Load());
-
-                if (this.Scripts?.Any() == true)
-                {
-                    this.SelectedScript = this.Scripts[0];
-                }
-            });
+            WeakReferenceMessenger.Default.Register<object, string>(this,
+                MessengerTokens.RefreshMainPageData,
+                (_, obj) => this.UpdateDisplayData());
         }
 
         #region [Commands]
@@ -153,11 +147,36 @@ namespace HamibotRemoteControl.ViewModels
                 this.Robots = new ObservableCollection<Robot>(robots);
             }
             this.Scripts = scripts;
+            this.SelectedScript = scripts?.FirstOrDefault();
 
             await RobotManager.Save(this.Robots);
             await ScriptManager.Save(this.Scripts);
         }
         #endregion
+
+        #region [Methods]
+        // 更新显示数据
+        private async void UpdateDisplayData()
+        {
+            if (SettingsManager.CurrentSettings == null)
+            {
+                await SettingsManager.LoadConfig();
+                this.Robots = new ObservableCollection<Robot>(await RobotManager.Load());
+                this.Scripts = new ObservableCollection<Script>(await ScriptManager.Load());
+                if (this.Scripts?.Any() == true && this.SelectedScript == null)
+                {
+                    this.SelectedScript = this.Scripts[0];
+                }
+            }
+
+            this.IsAutoRefresh = UserCenter.Instance.AutoRefresh;
+
+            // 自动刷新每次返回首页都会发起请求
+            if (IsAutoRefresh)
+            {
+                this.Refresh();
+            }
+        }
 
         // 取消所有选中状态
         private void ClearSelected()
@@ -167,5 +186,6 @@ namespace HamibotRemoteControl.ViewModels
                 robot.IsSelected = false;
             }
         }
+        #endregion
     }
 }

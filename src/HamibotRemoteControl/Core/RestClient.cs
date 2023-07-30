@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using HamibotRemoteControl.Extensions;
 
 namespace HamibotRemoteControl.Core
 {
@@ -54,7 +55,7 @@ namespace HamibotRemoteControl.Core
             }
             else if (method == HttpMethod.Delete)
             {
-                response = await _httpClient.DeleteAsync(url);
+                response = await _httpClient.DeleteAsync(url, httpContent);
             }
 
             // 处理响应

@@ -2,10 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HamibotRemoteControl.Views.AboutPage"
-             Title="AboutPage">
-    <VerticalStackLayout>
-        <Label Text="Welcome to .NET MAUI!"
-               VerticalOptions="Center"
-               HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="关于"
+             Background="{StaticResource BackgroundColor.Primary}">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,30,30,20">
+            <Label Text="本工具为基于Hamibot官方API开发的辅助工具，并不提供任何破解用法。使用前请自行到Hamibot设置选项中获取授权令牌进行设置：" />
+            <Image Source="Resources/Images/hamibot_example.png"
+                   Margin="0,5,0,0" />
+
+            <HorizontalStackLayout Margin="0,10,0,20">
+                <Label Text="Hamibot注册地址："></Label>
+                <Label Text="点击这里"
+                       TextColor="#4B4CED">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLabelTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+            <Label Text="本软件为Github开源项目，欢迎Star。源码地址：" />
+            <Label Text="https://github.com/laosanyuan/HamibotRemoteControl"
+                   TextColor="#4B4CED">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnGithubTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="如有任何使用问题，可以联系作者讨论："
+                   Margin="0,20,0,0" />
+            <Image Source="Resources/Images/qr_code.png" />
+
+            <Label x:Name="version"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,20" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
