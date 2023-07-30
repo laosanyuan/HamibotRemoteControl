@@ -1,4 +1,6 @@
-﻿namespace HamibotRemoteControl.Views;
+﻿using System.Globalization;
+
+namespace HamibotRemoteControl.Views;
 
 public partial class MainPage : ContentPage
 {

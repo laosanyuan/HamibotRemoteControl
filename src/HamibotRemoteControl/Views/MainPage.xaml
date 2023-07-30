@@ -2,14 +2,156 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HamibotRemoteControl.Views.MainPage"
-             Background="{StaticResource Primary}">
+             xmlns:model="clr-namespace:HamibotRemoteControl.Models"
+             xmlns:converter="clr-namespace:HamibotRemoteControl.Converters"
+             Background="{StaticResource Primary}"
+             BindingContext="{Binding Source={StaticResource Locator},Path=MainPage}"
+             Title="首页">
+    <ContentPage.Resources>
+        <converter:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollView>
+            <VerticalStackLayout Spacing="25"
+                                 Padding="30,0"
+                                 VerticalOptions="Start">
+                <CollectionView ItemsSource="{Binding Robots}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Robot">
+                            <Frame CornerRadius="5"
+                                   Padding="20,5,20,10"
+                                   Background="#363E51"
+                                   Margin="0,0,0,15"
+                                   IsVisible="{Binding IsHidden,Converter={StaticResource ReverseBooleanConverter}}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="30" />
+                                            <Frame Background="green"
+                                                   VerticalOptions="Center"
+                                                   CornerRadius="13"
+                                                   HeightRequest="25"
+                                                   Margin="10,0"
+                                                   Padding="10,0">
+                                                <Frame.Triggers>
+                                                    <DataTrigger TargetType="Frame"
+                                                                 Binding="{Binding Online}"
+                                                                 Value="True">
+                                                        <Setter Property="Background"
+                                                                Value="green" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Frame"
+                                                                 Binding="{Binding Online}"
+                                                                 Value="False">
+                                                        <Setter Property="Background"
+                                                                Value="red" />
+                                                    </DataTrigger>
+                                                </Frame.Triggers>
+                                                <Label VerticalTextAlignment="Center">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label"
+                                                                     Binding="{Binding Online}"
+                                                                     Value="True">
+                                                            <Setter Property="Text"
+                                                                    Value="在线" />
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Label"
+                                                                     Binding="{Binding Online}"
+                                                                     Value="False">
+                                                            <Setter Property="Text"
+                                                                    Value="离线" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+                                            </Frame>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Margin="0,5">
+                                            <Label Text="{Binding Brand,StringFormat='{0} '}"
+                                                   TextColor="{StaticResource Foreground.Secondary}" />
+                                            <Label Text="{Binding Model}"
+                                                   TextColor="{StaticResource Foreground.Secondary}" />
+                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding AppVersion}"
+                                               TextColor="{StaticResource Foreground.Secondary}" />
+                                    </VerticalStackLayout>
+                                    <FlexLayout Direction="Row"
+                                                Grid.Row="1"
+                                                Wrap="Wrap"
+                                                Margin="0,5,0,0"
+                                                JustifyContent="Start"
+                                                BindableLayout.ItemsSource="{Binding Tags}"
+                                                AlignItems="Center">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Text="{Binding .}"
+                                                       Margin="0,0,3,0"
+                                                       TextColor="{StaticResource Foreground.Secondary}"
+                                                       VerticalTextAlignment="Center" />
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </FlexLayout>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="25"
-                             Padding="30,0"
-                             VerticalOptions="Center">
+                                    <CheckBox Grid.Row="0"
+                                              Grid.RowSpan="2"
+                                              HorizontalOptions="End"
+                                              IsChecked="{Binding IsSelected,Mode=TwoWay}" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Picker Title="选择脚本"
+                    TitleColor="{StaticResource Foreground.Primary}"
+                    FontSize="20"
+                    Margin="30,0,30,10"
+                    HorizontalTextAlignment="Center"
+                    ItemsSource="{Binding Scripts}"
+                    SelectedItem="{Binding SelectedScript,Mode=OneWayToSource}"
+                    TextColor="{StaticResource Foreground.Primary}"
+                    ItemDisplayBinding="{Binding Name}">
+
+            </Picker>
+            <Grid Grid.Row="1"
+                  Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="运行"
+                        HeightRequest="50"
+                        WidthRequest="100"
+                        Command="{Binding RunCommand}" />
+                <Button Grid.Column="2"
+                        Text="停止"
+                        HeightRequest="50"
+                        WidthRequest="100"
+                        Command="{Binding StopCommand}" />
+                <Button Text="刷新数据"
+                        Grid.Column="1"
+                        IsVisible="{Binding IsAutoRefresh}"
+                        Command="{Binding RefreshCommand}"
+                        HeightRequest="50"
+                        WidthRequest="120" />
+            </Grid>
+        </Grid>
+    </Grid>
 
 </ContentPage>

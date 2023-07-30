@@ -19,7 +19,6 @@ namespace HamibotRemoteControl.Models
     /// <summary>
     /// 脚本信息
     /// </summary>
-    [ObservableObject]
     public partial class Script
     {
         /// <summary>
@@ -106,11 +105,17 @@ namespace HamibotRemoteControl.Models
         [JsonPropertyName("appVersion")]
         public string AppVersion { get; set; }
 
+
+        private bool _isSelected = true;
         /// <summary>
         /// 是否被用户选中
         /// </summary>
         [JsonIgnore]
-        public bool IsSelected { get; set; } = true;
+        public bool IsSelected
+        {
+            get => this._isSelected;
+            set => SetProperty(ref this._isSelected, value);
+        }
         /// <summary>
         /// 是否被用户隐藏
         /// </summary>

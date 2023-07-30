@@ -8,6 +8,7 @@
     <Color x:Key="BackgroundColor.Tertiary">#37B6E9</Color>
 
     <Color x:Key="Foreground.Primary">White</Color>
+    <Color x:Key="Foreground.Secondary">#919191</Color>
 
     <Color x:Key="Primary">#242c3b</Color>
     <Color x:Key="Secondary">#353f54</Color>

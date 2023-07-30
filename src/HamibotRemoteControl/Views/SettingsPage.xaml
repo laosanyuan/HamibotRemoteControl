@@ -53,6 +53,7 @@
                 <Label Text="Hamibot令牌"
                        FontSize="20" />
                 <Editor FontSize="25"
+                        Placeholder="令牌从Hamibot官网“设置-令牌”处获得"
                         TextColor="{StaticResource Foreground.Primary}"
                         Text="{Binding Token, Mode=TwoWay}"
                         AutoSize="TextChanges" />
@@ -80,6 +81,9 @@
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
+
+                <Label Text="说明：由于 Hamibot API 每月免费调用次数有额度限制，为节约额度，增加自动刷新和脚本类型两项设置。当选择自动刷新时，机器人、脚本数据会由用户主动进行刷新。脚本类型仅选择自己需要的类型，同样可以减少就调用次数。如额度充足，可以选择自动刷新，使用体验更好。"
+                       Margin="10,30" />
             </VerticalStackLayout>
 
             <Grid Margin="20,30">
