@@ -30,11 +30,12 @@ internal class ScriptTypeTextConverter : IValueConverter
     {
         var type = (ScriptType)value;
         var text = "常规脚本+开发者脚本";
-        if ((type & ScriptType.Common) == ScriptType.Common)
+
+        if (type == ScriptType.Common)
         {
             text = "常规脚本";
         }
-        else if ((type & ScriptType.Developer) == ScriptType.Developer)
+        else if (type == ScriptType.Developer)
         {
             text = "开发者脚本";
         }
@@ -49,7 +50,7 @@ internal class ScriptTypeTextConverter : IValueConverter
         {
             "常规脚本" => ScriptType.Common,
             "开发者脚本" => ScriptType.Developer,
-            _ => ScriptType.Developer & ScriptType.Common,
+            _ => ScriptType.Developer | ScriptType.Common,
         };
     }
 }

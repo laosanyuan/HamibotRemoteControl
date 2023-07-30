@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HamibotRemoteControl.Core.ConfigManagers;
 using HamibotRemoteControl.Enums;
 using HamibotRemoteControl.Models;
 using HamibotRemoteControl.Tools;
@@ -74,7 +75,7 @@ namespace HamibotRemoteControl.ViewModels
                 AutoRefresh = this.AutoRefresh,
                 ScriptType = this.ScriptType,
             };
-            await ConfigManager.SaveConfig(tmpSettings);
+            await SettingsManager.SaveConfig(tmpSettings);
             this.RefreshSettings();
             this.IsSetting = false;
         }
@@ -82,7 +83,7 @@ namespace HamibotRemoteControl.ViewModels
 
         private void RefreshSettings()
         {
-            this._settings = ConfigManager.CurrentSettings;
+            this._settings = SettingsManager.CurrentSettings;
 
             this.Token = this._settings.Token;
             this.AutoRefresh = this._settings.AutoRefresh;

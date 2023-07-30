@@ -1,4 +1,4 @@
-﻿using HamibotRemoteControl.Tools;
+﻿using HamibotRemoteControl.Core.ConfigManagers;
 
 namespace HamibotRemoteControl;
 
@@ -15,6 +15,6 @@ public partial class App : Application
     {
         base.OnStart();
 
-        await ConfigManager.LoadConfig();
+        await SettingsManager.LoadConfig();
     }
 }

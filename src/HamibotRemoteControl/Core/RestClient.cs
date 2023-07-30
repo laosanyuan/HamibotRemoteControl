@@ -24,6 +24,10 @@ namespace HamibotRemoteControl.Core
             // 设置请求头
             if (!string.IsNullOrEmpty(token))
             {
+                if (_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+                {
+                    _httpClient.DefaultRequestHeaders.Remove("Authorization");
+                }
                 _httpClient.DefaultRequestHeaders.Add("Authorization", token);
             }
 
@@ -65,7 +69,7 @@ namespace HamibotRemoteControl.Core
                 };
             }
 
-            return new RestClientResponse() { IsSuccess = false };
+            return new RestClientResponse { IsSuccess = false };
         }
     }
 

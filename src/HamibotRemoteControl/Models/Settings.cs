@@ -18,7 +18,7 @@ namespace HamibotRemoteControl.Models
         /// <summary>
         /// 脚本使用类别
         /// </summary>
-        public ScriptType ScriptType { get; set; } = ScriptType.Common & ScriptType.Developer;
+        public ScriptType ScriptType { get; set; } = ScriptType.Common | ScriptType.Developer;
 
         /// <summary>
         /// 是否有效

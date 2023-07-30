@@ -103,7 +103,7 @@ namespace HamibotRemoteControl.Core
         /// <param name="run">运行/停止</param>
         /// <param name="type">脚本类别</param>
         /// <returns></returns>
-        public static async Task<bool> RunScript(string id, List<BaseRobot> robots, bool run = true, ScriptType type = ScriptType.Common)
+        public static async Task<bool> OperateScript(string id, List<BaseRobot> robots, bool run = true, ScriptType type = ScriptType.Common)
         {
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {

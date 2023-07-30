@@ -45,7 +45,6 @@ namespace HamibotRemoteControl.Models
         /// <summary>
         /// 脚本类别
         /// </summary>
-        [JsonIgnore]
         public ScriptType Type { get; set; }
     }
     #endregion
@@ -106,7 +105,7 @@ namespace HamibotRemoteControl.Models
         public string AppVersion { get; set; }
 
 
-        private bool _isSelected = true;
+        private bool _isSelected;
         /// <summary>
         /// 是否被用户选中
         /// </summary>
@@ -119,7 +118,6 @@ namespace HamibotRemoteControl.Models
         /// <summary>
         /// 是否被用户隐藏
         /// </summary>
-        [JsonIgnore]
         public bool IsHidden { get; set; }
     }
 
