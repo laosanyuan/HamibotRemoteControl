@@ -12,7 +12,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <!-- Display name -->
-    <ApplicationTitle>Hamibot遥控器</ApplicationTitle>
+    <ApplicationTitle>Hamibot 遥控器</ApplicationTitle>
 
     <!-- App Identifier -->
     <ApplicationId>com.companyname.hamibotremotecontrol</ApplicationId>
@@ -36,7 +36,7 @@
 
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="32,32" />
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="1024,1024" />
 
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
