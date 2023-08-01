@@ -36,8 +36,7 @@
                                         <HorizontalStackLayout>
                                             <Label Text="{Binding Name}"
                                                    FontSize="30" />
-                                            <Frame Background="green"
-                                                   VerticalOptions="Center"
+                                            <Frame VerticalOptions="Center"
                                                    CornerRadius="13"
                                                    HeightRequest="25"
                                                    Margin="10,0"
@@ -47,13 +46,13 @@
                                                                  Binding="{Binding Online}"
                                                                  Value="True">
                                                         <Setter Property="Background"
-                                                                Value="green" />
+                                                                Value="{StaticResource SuccessColor}" />
                                                     </DataTrigger>
                                                     <DataTrigger TargetType="Frame"
                                                                  Binding="{Binding Online}"
                                                                  Value="False">
                                                         <Setter Property="Background"
-                                                                Value="red" />
+                                                                Value="{StaticResource FailColor}" />
                                                     </DataTrigger>
                                                 </Frame.Triggers>
                                                 <Label VerticalTextAlignment="Center">

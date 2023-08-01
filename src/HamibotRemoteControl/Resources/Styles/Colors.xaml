@@ -10,6 +10,15 @@
     <Color x:Key="Foreground.Primary">White</Color>
     <Color x:Key="Foreground.Secondary">#919191</Color>
 
+    <!--成功-->
+    <Color x:Key="SuccessColor">#4FE6AF</Color>
+    <!--失败-->
+    <Color x:Key="FailColor">#ED1C24</Color>
+
+
+
+
+
     <Color x:Key="Primary">#242c3b</Color>
     <Color x:Key="Secondary">#353f54</Color>
     <Color x:Key="Tertiary">#222834</Color>

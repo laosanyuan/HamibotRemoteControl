@@ -9,6 +9,8 @@
             <Label Text="本工具为基于Hamibot官方API开发的辅助工具，并不提供任何破解用法。使用前请自行到Hamibot设置选项中获取授权令牌进行设置：" />
             <Image Source="Resources/Images/hamibot_example.png"
                    Margin="0,5,0,0" />
+            <Label Text="当前Hamibot官方每月会提供300次免费API调用次数，超出调用次数后本软件将无法使用。如需在免费次数使用完后继续使用，需要到Hamibot官网自行购买额度。
+如只使用免费额度，请将设置中的自动刷新选项关闭（默认即为关闭），只在有必要的时机通过按钮手动刷新机器人和脚本数据。机器人和脚本列表数据会保存在本地，如远程信息没有发生变化，不刷新也可以执行运行和停止。" />
 
             <HorizontalStackLayout Margin="0,10,0,20">
                 <Label Text="Hamibot注册地址："></Label>

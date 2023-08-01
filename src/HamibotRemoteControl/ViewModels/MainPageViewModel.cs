@@ -146,8 +146,20 @@ namespace HamibotRemoteControl.ViewModels
             {
                 this.Robots = new ObservableCollection<Robot>(robots);
             }
-            this.Scripts = scripts;
-            this.SelectedScript = scripts?.FirstOrDefault();
+            else
+            {
+                //TODO
+            }
+
+            if (scripts.Count > 0)
+            {
+                this.Scripts = scripts;
+                this.SelectedScript = scripts?.FirstOrDefault();
+            }
+            else
+            {
+                // TODO 获取脚本失败
+            }
 
             await RobotManager.Save(this.Robots);
             await ScriptManager.Save(this.Scripts);
@@ -161,8 +173,8 @@ namespace HamibotRemoteControl.ViewModels
             if (SettingsManager.CurrentSettings == null)
             {
                 await SettingsManager.LoadConfig();
-                this.Robots = new ObservableCollection<Robot>(await RobotManager.Load());
-                this.Scripts = new ObservableCollection<Script>(await ScriptManager.Load());
+                this.Robots = new ObservableCollection<Robot>(await RobotManager.Load() ?? new List<Robot>());
+                this.Scripts = new ObservableCollection<Script>(await ScriptManager.Load() ?? new List<Script>());
                 if (this.Scripts?.Any() == true && this.SelectedScript == null)
                 {
                     this.SelectedScript = this.Scripts[0];
