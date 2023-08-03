@@ -26,7 +26,13 @@ Hamibot遥控器是基于Hamibot官方开放的API接口开发的一款自动化
 
 Hamibot遥控器就是基于这个前提开发的供用户使用的可以通过app查看机器人状态、执行脚本运行操作的开源第三方工具。
 
-## 使用效果【待补充】
+## 使用效果
+
+<div style="width: 750px; overflow: hidden;">
+    <img src="images/app_home.jpg" style="float: left; width: 250px;" />
+    <img src="images/app_scripts.jpg" style="float: left; width: 250px;" />
+    <img src="images/app_settings.jpg" style="float: left; width: 250px;" />
+</div>
 
 ## 使用方法
 
