@@ -34,13 +34,34 @@
         <Setter Property="CornerRadius"
                 Value="5" />
         <Setter Property="FontSize"
-                Value="20" />
+                Value="16" />
         <Setter Property="TextColor"
                 Value="{StaticResource Foreground.Primary}" />
+
+        <Style.Triggers>
+            <Trigger TargetType="Button"
+                     Property="IsEnabled"
+                     Value="False">
+                <Setter Property="Background"
+                        Value="{StaticResource BackgroundColor.Forbidden}" />
+            </Trigger>
+        </Style.Triggers>
+
     </Style>
 
     <Style TargetType="Label">
         <Setter Property="TextColor"
                 Value="{StaticResource Foreground.Primary}" />
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Style.Triggers>
+            <Trigger TargetType="CheckBox"
+                     Property="IsEnabled"
+                     Value="False">
+                <Setter Property="Color"
+                        Value="{StaticResource BackgroundColor.Forbidden}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

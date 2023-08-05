@@ -8,6 +8,7 @@ using HamibotRemoteControl.Core.ConfigManagers;
 using HamibotRemoteControl.Enums;
 using HamibotRemoteControl.Common;
 using HamibotRemoteControl.Tools;
+using System.ComponentModel;
 
 namespace HamibotRemoteControl.ViewModels
 {
@@ -37,17 +38,42 @@ namespace HamibotRemoteControl.ViewModels
         [ObservableProperty]
         private Script _selectedScript;
 
+        private ObservableCollection<Robot> _robots;
         /// <summary>
         /// 机器人列表
         /// </summary>
-        [ObservableProperty]
-        private ObservableCollection<Robot> _robots;
+        public ObservableCollection<Robot> Robots
+        {
+            get => _robots;
+            set
+            {
+                if (_robots != value)
+                {
+                    // 清除旧数据订阅事件
+                    if (_robots != null)
+                    {
+                        foreach (var robot in this._robots)
+                        {
+                            robot.PropertyChanged -= Robot_PropertyChanged;
+                        }
+                    }
+
+                    _robots = value;
+                    UpdateRobotSelectStatus();
+                    foreach (var robot in _robots)
+                    {
+                        robot.PropertyChanged += this.Robot_PropertyChanged;
+                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Robots)));
+                }
+            }
+        }
 
         /// <summary>
-        /// 是否可执行操作
+        /// 是否存在被选中机器人
         /// </summary>
         [ObservableProperty]
-        private bool _canOperate;
+        private bool _haveSelectedRobot;
         #endregion
 
         public MainPageViewModel()
@@ -196,6 +222,18 @@ namespace HamibotRemoteControl.ViewModels
             foreach (var robot in this.Robots)
             {
                 robot.IsSelected = false;
+            }
+        }
+
+        // 更新机器人选中状态
+        private void UpdateRobotSelectStatus() => HaveSelectedRobot = Robots.Any(robot => !robot.IsHidden && robot.IsSelected);
+
+        // 选中状态变化更新
+        private void Robot_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Robot.IsSelected))
+            {
+                this.UpdateRobotSelectStatus();
             }
         }
         #endregion

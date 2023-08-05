@@ -9,6 +9,7 @@
              Title="首页">
     <ContentPage.Resources>
         <converter:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
+        <converter:CollectionIsEmptyConverter x:Key="CollectionIsEmptyConverter" />
     </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -102,7 +103,8 @@
                                     <CheckBox Grid.Row="0"
                                               Grid.RowSpan="2"
                                               HorizontalOptions="End"
-                                              IsChecked="{Binding IsSelected,Mode=TwoWay}" />
+                                              IsChecked="{Binding IsSelected,Mode=TwoWay}"
+                                              IsEnabled="{Binding Online}" />
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -110,6 +112,15 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
+
+        <!--空机器人列表提示-->
+        <Label Text="没有获取到机器人列表，请先进行设置，然后主动刷新获取数据"
+               IsVisible="{Binding Robots,Converter={StaticResource CollectionIsEmptyConverter}}"
+               FontSize="18"
+               Margin="30,0,30,30"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               TextType="Html" />
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -137,12 +148,14 @@
                 <Button Text="运行"
                         HeightRequest="50"
                         WidthRequest="100"
-                        Command="{Binding RunCommand}" />
+                        Command="{Binding RunCommand}"
+                        IsEnabled="{Binding HaveSelectedRobot}" />
                 <Button Grid.Column="2"
                         Text="停止"
                         HeightRequest="50"
                         WidthRequest="100"
-                        Command="{Binding StopCommand}" />
+                        Command="{Binding StopCommand}"
+                        IsEnabled="{Binding HaveSelectedRobot}" />
                 <Button Text="刷新数据"
                         Grid.Column="1"
                         IsVisible="{Binding IsAutoRefresh,Converter={StaticResource ReverseBooleanConverter}}"

@@ -6,8 +6,8 @@ namespace HamibotRemoteControl.Core
 {
     static class HamibotApi
     {
-        private static readonly RestClient _client = new RestClient();
-        private static readonly string _baseUrl = "https://api.hamibot.com";
+        private static readonly RestClient Client = new();
+        private static readonly string BaseUrl = "https://api.hamibot.cn";
 
 
         #region [Robots]
@@ -19,8 +19,8 @@ namespace HamibotRemoteControl.Core
         {
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
-                var url = $"{_baseUrl}/v1/robots";
-                var response = await _client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
+                var url = $"{BaseUrl}/v1/robots";
+                var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
                     return JsonSerializer.Deserialize<RobotCollection>(response.Json)?.Items;
@@ -39,8 +39,8 @@ namespace HamibotRemoteControl.Core
         {
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
-                var url = $"{_baseUrl}/v1/robots/{id}";
-                var response = await _client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
+                var url = $"{BaseUrl}/v1/robots/{id}";
+                var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
                 return response is { IsSuccess: true };
             }
             return false;
@@ -55,8 +55,8 @@ namespace HamibotRemoteControl.Core
         {
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
-                var url = $"{_baseUrl}/v1/robots/{id}/stop";
-                var response = await _client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
+                var url = $"{BaseUrl}/v1/robots/{id}/stop";
+                var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
                 return response is { IsSuccess: true };
             }
             return false;
@@ -78,9 +78,9 @@ namespace HamibotRemoteControl.Core
                     ScriptType.Developer => "devscripts",
                     _ => "scripts"
                 };
-                var url = $"{_baseUrl}/v1/{parameter}";
+                var url = $"{BaseUrl}/v1/{parameter}";
 
-                var response = await _client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
+                var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
                     var result = JsonSerializer.Deserialize<ScriptCollection>(response.Json)?.Items;
@@ -112,11 +112,11 @@ namespace HamibotRemoteControl.Core
                     ScriptType.Developer => "devscripts",
                     _ => "scripts"
                 };
-                var url = $"{_baseUrl}/v1/{tmpType}/{id}/run";
+                var url = $"{BaseUrl}/v1/{tmpType}/{id}/run";
 
                 var parameters = new Dictionary<string, List<BaseRobot>> { { "robots", robots } };
 
-                var response = await _client.SendRequest(
+                var response = await Client.SendRequest(
                     url,
                     run ? HttpMethod.Post : HttpMethod.Delete,
                     UserCenter.Instance.Token,
