@@ -17,22 +17,8 @@
     <Color x:Key="FailColor">#ED1C24</Color>
 
 
-
-
-
-    <Color x:Key="Primary">#242c3b</Color>
-    <Color x:Key="Secondary">#353f54</Color>
-    <Color x:Key="Tertiary">#222834</Color>
-    <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
-
+    <!--tag颜色-->
+    <Color x:Key="TagBackground">#37B6E9</Color>
+    <Color x:Key="TagForeground">#242C3B</Color>
 
 </ResourceDictionary>

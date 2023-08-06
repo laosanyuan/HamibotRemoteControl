@@ -49,11 +49,11 @@
 
         <!--配置过程-->
         <Grid IsVisible="{Binding IsSetting}">
-            <VerticalStackLayout Margin="40,60,40,0">
+            <VerticalStackLayout Margin="40,0,40,0">
                 <Label Text="Hamibot令牌"
                        FontSize="20" />
                 <Editor FontSize="18"
-                        Placeholder="令牌从Hamibot官网“设置-令牌”处获得"
+                        Placeholder="Hamibot官网“设置-令牌”处获得"
                         TextColor="{StaticResource Foreground.Primary}"
                         Text="{Binding Token, Mode=TwoWay}"
                         AutoSize="TextChanges" />
