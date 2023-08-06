@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using HamibotRemoteControl.Models;
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Messaging;
+using HamibotRemoteControl.Common;
 using HamibotRemoteControl.Core;
 using HamibotRemoteControl.Core.ConfigManagers;
 using HamibotRemoteControl.Enums;
-using HamibotRemoteControl.Common;
+using HamibotRemoteControl.Models;
 using HamibotRemoteControl.Tools;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace HamibotRemoteControl.ViewModels
@@ -89,7 +89,7 @@ namespace HamibotRemoteControl.ViewModels
         {
             if (this.SelectedScript == null)
             {
-                //TODO Toast
+                ToastHelper.Show("没有选则运行脚本，请选择后再执行！");
                 return;
             }
 
@@ -98,18 +98,12 @@ namespace HamibotRemoteControl.ViewModels
                     .Where(t => t.IsSelected)
                     .Select(r => new BaseRobot() { Name = r.Name, Id = r.Id })
                     .ToList();
-            if (!selectedRobots.Any())
-            {
-                //TODO Toast
-                return;
-            }
 
             if (!await HamibotApi.OperateScript(this.SelectedScript.Id, selectedRobots, true, this.SelectedScript.Type))
             {
-                //TODO Toast
+                ToastHelper.Show("执行操作失败，请重试或检查API配额是否充足！");
             }
 
-            ClearSelected();
             ClearSelected();
         }
 
@@ -118,7 +112,7 @@ namespace HamibotRemoteControl.ViewModels
         {
             if (this.SelectedScript == null)
             {
-                //TODO Toast
+                ToastHelper.Show("没有选则运行脚本，请选择后再执行！");
                 return;
             }
 
@@ -127,15 +121,10 @@ namespace HamibotRemoteControl.ViewModels
                     .Where(t => t.IsSelected)
                     .Select(r => new BaseRobot() { Name = r.Name, Id = r.Id })
                     .ToList();
-            if (!selectedRobots.Any())
-            {
-                //TODO Toast
-                return;
-            }
 
             if (!await HamibotApi.OperateScript(this.SelectedScript.Id, selectedRobots, false, this.SelectedScript.Type))
             {
-                //TODO Toast
+                ToastHelper.Show("执行操作失败，请重试或检查API配额是否充足！");
             }
 
             ClearSelected();
@@ -174,7 +163,7 @@ namespace HamibotRemoteControl.ViewModels
             }
             else
             {
-                //TODO
+                ToastHelper.Show("没有获取到有效机器人列表，请重试或者检查配置！");
             }
 
             if (scripts.Count > 0)
@@ -184,7 +173,7 @@ namespace HamibotRemoteControl.ViewModels
             }
             else
             {
-                // TODO 获取脚本失败
+                ToastHelper.Show("没有获取到有效脚本列表，请重试或者检查配置！");
             }
 
             await RobotManager.Save(this.Robots);

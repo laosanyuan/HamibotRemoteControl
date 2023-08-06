@@ -39,7 +39,7 @@
                    IsVisible="{Binding IsValid,Converter={StaticResource ReverseBooleanConverter}}" />
 
             <Button Text="设置"
-                    HeightRequest="50"
+                    HeightRequest="40"
                     WidthRequest="200"
                     HorizontalOptions="Center"
                     VerticalOptions="End"
@@ -86,21 +86,21 @@
                        Margin="10,30" />
             </VerticalStackLayout>
 
-            <Grid Margin="20,30">
+            <Grid Margin="20,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Text="取消"
-                        HeightRequest="50"
-                        WidthRequest="150"
+                        HeightRequest="40"
+                        WidthRequest="80"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
                         Command="{Binding CancelCommand}" />
                 <Button Text="保存"
                         Grid.Column="1"
-                        HeightRequest="50"
-                        WidthRequest="150"
+                        HeightRequest="40"
+                        WidthRequest="80"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
                         Command="{Binding SaveCommand}" />

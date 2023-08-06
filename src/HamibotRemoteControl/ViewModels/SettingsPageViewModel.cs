@@ -78,6 +78,7 @@ namespace HamibotRemoteControl.ViewModels
             await SettingsManager.SaveConfig(tmpSettings);
             this.RefreshSettings();
             this.IsSetting = false;
+            ToastHelper.Show("修改配置成功！");
         }
         #endregion
 
