@@ -10,6 +10,7 @@ using HamibotRemoteControl.Models;
 using HamibotRemoteControl.Tools;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Autofac;
 
 namespace HamibotRemoteControl.ViewModels
 {
@@ -19,8 +20,8 @@ namespace HamibotRemoteControl.ViewModels
     [ObservableObject]
     partial class MainPageViewModel
     {
-        private readonly RobotDb _robotDb = new();
-        private readonly ScriptDb _scriptDb = new();
+        private readonly RobotDb _robotDb;
+        private readonly ScriptDb _scriptDb;
 
         #region [Properties]
         /// <summary>
@@ -84,6 +85,9 @@ namespace HamibotRemoteControl.ViewModels
             WeakReferenceMessenger.Default.Register<object, string>(this,
                 MessengerTokens.RefreshMainPageData,
                 (_, obj) => this.UpdateDisplayData());
+
+            this._robotDb = App.Container.Resolve<RobotDb>();
+            this._scriptDb = App.Container.Resolve<ScriptDb>();
         }
 
         #region [Commands]

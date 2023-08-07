@@ -1,6 +1,9 @@
 ﻿using HamibotRemoteControl.Models;
 using System.Text.Json;
+using Autofac;
+using HamibotRemoteControl.DataBase;
 using HamibotRemoteControl.Enums;
+using HamibotRemoteControl.Models.DataBase;
 
 namespace HamibotRemoteControl.Core
 {
@@ -8,6 +11,12 @@ namespace HamibotRemoteControl.Core
     {
         private static readonly RestClient Client = new();
         private static readonly string BaseUrl = "https://api.hamibot.cn";
+        private static ApiCallCountDb _apiCallCountDb;
+
+        static HamibotApi()
+        {
+            _apiCallCountDb = App.Container.Resolve<ApiCallCountDb>();
+        }
 
 
         #region [Robots]
@@ -20,6 +29,7 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots";
+                await _apiCallCountDb.Insert(new ApiCallCount(url));
                 var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
@@ -40,6 +50,7 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots/{id}";
+                await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
                 var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
                 return response is { IsSuccess: true };
             }
@@ -56,6 +67,7 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots/{id}/stop";
+                await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
                 var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
                 return response is { IsSuccess: true };
             }
@@ -80,6 +92,7 @@ namespace HamibotRemoteControl.Core
                 };
                 var url = $"{BaseUrl}/v1/{parameter}";
 
+                await _apiCallCountDb.Insert(new ApiCallCount(url));
                 var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
@@ -115,6 +128,7 @@ namespace HamibotRemoteControl.Core
                 var url = $"{BaseUrl}/v1/{tmpType}/{id}/run";
 
                 var parameters = new Dictionary<string, List<BaseRobot>> { { "robots", robots } };
+                await _apiCallCountDb.Insert(new ApiCallCount(url, run ? ApiOperation.Post : ApiOperation.Delete));
 
                 var response = await Client.SendRequest(
                     url,
