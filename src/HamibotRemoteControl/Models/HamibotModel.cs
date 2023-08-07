@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using HamibotRemoteControl.Enums;
+using SQLite;
 using System.Text.Json.Serialization;
 
 namespace HamibotRemoteControl.Models
@@ -46,6 +47,11 @@ namespace HamibotRemoteControl.Models
         /// 脚本类别
         /// </summary>
         public ScriptType Type { get; set; }
+
+        /// <summary>
+        /// 是否被隐藏
+        /// </summary>
+        public bool IsHidden { get; set; }
     }
     #endregion
 
@@ -66,6 +72,7 @@ namespace HamibotRemoteControl.Models
     /// </summary>
     public class BaseRobot
     {
+        [PrimaryKey]
         [JsonPropertyName("_id")]
         public string Id { get; set; }
         [JsonPropertyName("name")]
@@ -81,43 +88,48 @@ namespace HamibotRemoteControl.Models
         /// <summary>
         /// 是否在线
         /// </summary>
+
         [JsonPropertyName("online")]
         public bool Online { get; set; }
         /// <summary>
         /// 标签
         /// </summary>
+
         [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }
         /// <summary>
         /// 手机品牌
         /// </summary>
+
         [JsonPropertyName("brand")]
         public string Brand { get; set; }
         /// <summary>
         /// 手机型号
         /// </summary>
+
         [JsonPropertyName("model")]
         public string Model { get; set; }
         /// <summary>
         /// Hamibot版本号
         /// </summary>
+
         [JsonPropertyName("appVersion")]
         public string AppVersion { get; set; }
-
 
         private bool _isSelected;
         /// <summary>
         /// 是否被用户选中
         /// </summary>
-        [JsonIgnore]
         public bool IsSelected
         {
             get => this._isSelected;
             set => SetProperty(ref this._isSelected, value);
         }
+
         /// <summary>
         /// 是否被用户隐藏
         /// </summary>
+
         public bool IsHidden { get; set; }
     }
 

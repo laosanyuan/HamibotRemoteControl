@@ -86,9 +86,11 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
   </ItemGroup>
 
   <ItemGroup>

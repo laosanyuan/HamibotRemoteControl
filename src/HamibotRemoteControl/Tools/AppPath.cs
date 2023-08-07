@@ -6,19 +6,22 @@
         /// 设置文件路径
         /// </summary>
         public static string SettingPath =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "hamibot_settings5.json");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "hamibot_settings.json");
 
         /// <summary>
-        /// 机器人文件路径
+        /// 数据库文件夹
         /// </summary>
-        public static string RobotsPath =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "hamibot_robots.json");
+        public static string DataBaseFolder = CreatePath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "db"));
 
-        /// <summary>
-        /// 脚本文件路径
-        /// </summary>
-        public static string ScriptsPath =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "hamibot_scripts.json");
 
+        // 创建文件夹
+        private static string CreatePath(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            return path;
+        }
     }
 }

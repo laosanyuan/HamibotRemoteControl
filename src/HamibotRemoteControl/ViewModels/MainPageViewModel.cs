@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using HamibotRemoteControl.Common;
 using HamibotRemoteControl.Core;
 using HamibotRemoteControl.Core.ConfigManagers;
+using HamibotRemoteControl.DataBase;
 using HamibotRemoteControl.Enums;
 using HamibotRemoteControl.Models;
 using HamibotRemoteControl.Tools;
@@ -18,6 +19,8 @@ namespace HamibotRemoteControl.ViewModels
     [ObservableObject]
     partial class MainPageViewModel
     {
+        private readonly RobotDb _robotDb = new();
+        private readonly ScriptDb _scriptDb = new();
 
         #region [Properties]
         /// <summary>
@@ -169,15 +172,15 @@ namespace HamibotRemoteControl.ViewModels
             if (scripts.Count > 0)
             {
                 this.Scripts = scripts;
-                this.SelectedScript = scripts?.FirstOrDefault();
+                this.SelectedScript = scripts.FirstOrDefault();
             }
             else
             {
                 ToastHelper.Show("没有获取到有效脚本列表，请重试或者检查配置！");
             }
 
-            await RobotManager.Save(this.Robots);
-            await ScriptManager.Save(this.Scripts);
+            await _scriptDb.UpdateRobots(this.Scripts);
+            await _robotDb.UpdateRobots(this.Robots);
         }
         #endregion
 
@@ -187,9 +190,10 @@ namespace HamibotRemoteControl.ViewModels
         {
             if (SettingsManager.CurrentSettings == null)
             {
+                this.Robots = new ObservableCollection<Robot>(await _robotDb.GetRobots());
+                this.Scripts = new ObservableCollection<Script>(await _scriptDb.GetScripts());
+
                 await SettingsManager.LoadConfig();
-                this.Robots = new ObservableCollection<Robot>(await RobotManager.Load() ?? new List<Robot>());
-                this.Scripts = new ObservableCollection<Script>(await ScriptManager.Load() ?? new List<Script>());
                 if (this.Scripts?.Any() == true && this.SelectedScript == null)
                 {
                     this.SelectedScript = this.Scripts[0];
