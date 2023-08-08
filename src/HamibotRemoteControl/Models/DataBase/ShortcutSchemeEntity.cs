@@ -1,16 +1,14 @@
 ﻿using HamibotRemoteControl.Enums;
+using SQLite;
 
 namespace HamibotRemoteControl.Models.DataBase
 {
     internal class ShortcutSchemeEntity
     {
         /// <summary>
-        /// id
-        /// </summary>
-        public string Id { get; set; }
-        /// <summary>
         /// 方案名称
         /// </summary>
+        [PrimaryKey]
         public string Name { get; set; }
         /// <summary>
         /// 获取机器人方式
@@ -25,11 +23,11 @@ namespace HamibotRemoteControl.Models.DataBase
         /// </summary>
         public string ScriptId { get; set; }
         /// <summary>
-        /// Tag列表，根据SelectRobotType
+        /// Tag列表，根据SelectRobotType.Tag
         /// </summary>
         public string TagsStr { get; set; }
         /// <summary>
-        /// 机器人id列表，根据SelectRobotType
+        /// 机器人id列表，根据SelectRobotType.Name
         /// </summary>
         public string RobotIdsStr { get; set; }
     }

@@ -76,5 +76,15 @@ namespace HamibotRemoteControl.DataBase
             var count = await _database.InsertAsync(tmp);
             return count > 0;
         }
+
+        /// <summary>
+        /// 删除方案
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<bool> DeleteScheme(string name)
+        {
+            return await _database.DeleteAsync<ShortcutSchemeEntity>(name) > 0;
+        }
     }
 }

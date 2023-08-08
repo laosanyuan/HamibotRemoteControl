@@ -20,7 +20,7 @@ namespace HamibotRemoteControl.DataBase
         /// 获取脚本列表
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Script>> GetScripts()
+        public async Task<List<Script>> GetAllScripts()
         {
             return await _database.Table<Script>().ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace HamibotRemoteControl.DataBase
         /// <returns></returns>
         public async Task UpdateRobots(Collection<Script> scripts)
         {
-            var existingRobots = await GetScripts();
+            var existingRobots = await GetAllScripts();
 
             // 同步隐藏状态
             foreach (var script in scripts)
@@ -49,6 +49,16 @@ namespace HamibotRemoteControl.DataBase
 
             // 插入新数据
             await _database.InsertAllAsync(scripts);
+        }
+
+        /// <summary>
+        /// 根据id获取脚本
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Script> GetScript(string id)
+        {
+            return await _database.Table<Script>().FirstOrDefaultAsync(t => t.Id.Equals(id));
         }
     }
 }

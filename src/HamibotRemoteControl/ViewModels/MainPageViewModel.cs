@@ -194,8 +194,8 @@ namespace HamibotRemoteControl.ViewModels
         {
             if (SettingsManager.CurrentSettings == null)
             {
-                this.Robots = new ObservableCollection<Robot>(await _robotDb.GetRobots());
-                this.Scripts = new ObservableCollection<Script>(await _scriptDb.GetScripts());
+                this.Robots = new ObservableCollection<Robot>(await _robotDb.GetAllRobots());
+                this.Scripts = new ObservableCollection<Script>(await _scriptDb.GetAllScripts());
 
                 await SettingsManager.LoadConfig();
                 if (this.Scripts?.Any() == true && this.SelectedScript == null)

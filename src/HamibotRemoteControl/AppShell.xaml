@@ -37,6 +37,10 @@
                   ContentTemplate="{DataTemplate views:MainPage}"
                   Route="MainPage"
                   Icon="Resources/Images/Icons/home.png" />
+    <ShellContent Title="快捷方案"
+                  ContentTemplate="{DataTemplate views:ShortcutSchemeView}"
+                  Route="ShortcutScheme"
+                  Icon="Resources/Images/Icons/home.png" />
 
     <!--<ShellContent Title="机器人管理"
                   ContentTemplate="{DataTemplate views:RobotManagePage}"

@@ -15,6 +15,7 @@ namespace HamibotRemoteControl.ViewModels
             _builder.RegisterType<ScriptManagePageViewModel>().AsSelf().SingleInstance();
             _builder.RegisterType<DataStatisticsPageViewModel>().AsSelf().SingleInstance();
             _builder.RegisterType<SettingsPageViewModel>().AsSelf().SingleInstance();
+            _builder.RegisterType<ShortcutSchemeViewModel>().AsSelf().SingleInstance();
 
             _container = _builder.Build();
         }
@@ -24,5 +25,6 @@ namespace HamibotRemoteControl.ViewModels
         public ScriptManagePageViewModel ScriptManagePage => _container.Resolve<ScriptManagePageViewModel>();
         public DataStatisticsPageViewModel DataStatisticsPage => _container.Resolve<DataStatisticsPageViewModel>();
         public SettingsPageViewModel SettingsPage => _container.Resolve<SettingsPageViewModel>();
+        public ShortcutSchemeViewModel ShortcutScheme => _container.Resolve<ShortcutSchemeViewModel>();
     }
 }

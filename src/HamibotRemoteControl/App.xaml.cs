@@ -24,6 +24,7 @@ public partial class App : Application
         builder.RegisterType<ApiCallCountDb>().AsSelf().SingleInstance();
         builder.RegisterType<RobotDb>().AsSelf().SingleInstance();
         builder.RegisterType<ScriptDb>().AsSelf().SingleInstance();
+        builder.RegisterType<ShortcutSchemeDb>().AsSelf().SingleInstance();
 
         Container = builder.Build();
     }
