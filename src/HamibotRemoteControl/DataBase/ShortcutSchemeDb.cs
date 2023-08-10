@@ -21,16 +21,14 @@ namespace HamibotRemoteControl.DataBase
                 cfg.CreateMap<ShortcutSchemeModel, ShortcutSchemeEntity>()
                     .ForMember(
                         dest => dest.TagsStr,
-                        opt => opt.MapFrom(src => string.Join("#", src.Tags)));
-                cfg.CreateMap<ShortcutSchemeEntity, ShortcutSchemeModel>()
-                    .ForMember(
-                        dest => dest.Tags,
-                        opt => opt.MapFrom(src => src.TagsStr.Split('#', StringSplitOptions.None)));
-                cfg.CreateMap<ShortcutSchemeModel, ShortcutSchemeEntity>()
+                        opt => opt.MapFrom(src => string.Join("#", src.Tags)))
                     .ForMember(
                         dest => dest.RobotIdsStr,
                         opt => opt.MapFrom(src => string.Join("#", src.RobotIds)));
                 cfg.CreateMap<ShortcutSchemeEntity, ShortcutSchemeModel>()
+                    .ForMember(
+                        dest => dest.Tags,
+                        opt => opt.MapFrom(src => src.TagsStr.Split('#', StringSplitOptions.None)))
                     .ForMember(
                         dest => dest.RobotIds,
                         opt => opt.MapFrom(src => src.RobotIdsStr.Split('#', StringSplitOptions.None)));

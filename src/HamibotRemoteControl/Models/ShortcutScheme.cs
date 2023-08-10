@@ -1,4 +1,5 @@
-﻿using HamibotRemoteControl.Enums;
+﻿using HamibotRemoteControl.DataBase;
+using HamibotRemoteControl.Enums;
 
 namespace HamibotRemoteControl.Models
 {
@@ -7,10 +8,6 @@ namespace HamibotRemoteControl.Models
     /// </summary>
     internal class ShortcutSchemeModel
     {
-        /// <summary>
-        /// id
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>
         /// 方案名称
         /// </summary>
@@ -44,5 +41,34 @@ namespace HamibotRemoteControl.Models
         /// 机器人列表
         /// </summary>
         public List<Robot> Robots { get; set; }
+
+
+        public static ShortcutSchemeModel CreateShortcutSchemeModelByRobot(
+            string name,
+            string scriptId,
+            List<string> robotIds)
+        {
+            return new ShortcutSchemeModel()
+            {
+                SelectRobotType = SelectRobotType.Name,
+                Name = name,
+                ScriptId = scriptId,
+                RobotIds = robotIds
+            };
+        }
+
+        public static ShortcutSchemeModel CreateShortcutSchemeModelByTag(
+            string name,
+            string scriptId,
+            List<string> tags)
+        {
+            return new ShortcutSchemeModel()
+            {
+                SelectRobotType = SelectRobotType.Tag,
+                Name = name,
+                ScriptId = scriptId,
+                Tags = tags
+            };
+        }
     }
 }

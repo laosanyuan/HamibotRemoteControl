@@ -76,10 +76,19 @@ namespace HamibotRemoteControl.DataBase
         /// <returns></returns>
         public async Task<List<Robot>> GetRobotByIds(List<string> ids, bool includeHidden = true)
         {
-            var entities =
-                await _database.Table<RobotEntity>()
-                    .Where(t => includeHidden ? ids.Contains(t.Id) : ids.Contains(t.Id) && !t.IsHidden)
-                    .ToListAsync();
+            if (ids == null || ids.Count == 0)
+            {
+                return new List<Robot>();
+            }
+
+            var query = _database.Table<RobotEntity>().Where(t => ids.Contains(t.Id));
+
+            if (!includeHidden)
+            {
+                query = query.Where(t => !t.IsHidden);
+            }
+
+            var entities = await query.ToListAsync();
             return entities.Select(_mapper.Map<Robot>).ToList();
         }
 
@@ -94,7 +103,9 @@ namespace HamibotRemoteControl.DataBase
             List<Robot> result = new();
             allRobots.ForEach(t =>
             {
-                if (t.Tags.Intersect(tags).Any())
+                if (tags != null
+                    && t?.Tags != null
+                    && t.Tags.Intersect(tags).Any())
                 {
                     result.Add(t);
                 }

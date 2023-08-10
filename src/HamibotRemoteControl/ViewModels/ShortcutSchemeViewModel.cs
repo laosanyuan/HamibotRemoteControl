@@ -4,6 +4,9 @@ using HamibotRemoteControl.DataBase;
 using HamibotRemoteControl.Enums;
 using HamibotRemoteControl.Models;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using HamibotRemoteControl.Tools;
 
 namespace HamibotRemoteControl.ViewModels
 {
@@ -25,13 +28,39 @@ namespace HamibotRemoteControl.ViewModels
 
         public ShortcutSchemeViewModel()
         {
+            WeakReferenceMessenger.Default.Register<object, string>(this,
+                MessengerTokens.RefreshShortcutSchemes, async (_, obj) => await this.UpdateSchemes());
+
             this._shortcutSchemeDb = App.Container.Resolve<ShortcutSchemeDb>();
             this._scriptDb = App.Container.Resolve<ScriptDb>();
             this._robotDb = App.Container.Resolve<RobotDb>();
-
-            Task.Run(UpdateSchemes);
         }
 
+        #region [Icommands]
+        [RelayCommand]
+        private void DeleteScheme(ShortcutSchemeModel scheme)
+        {
+
+        }
+
+        [RelayCommand]
+        private void RunScheme(ShortcutSchemeModel scheme)
+        {
+
+        }
+
+        [RelayCommand]
+        private void StopScheme(ShortcutSchemeModel scheme)
+        {
+
+        }
+
+        [RelayCommand]
+        private async void AddScheme(ShortcutSchemeModel scheme)
+        {
+            await this._shortcutSchemeDb.InsertScheme(scheme);
+        }
+        #endregion
 
 
         #region [Private Methods]
@@ -42,6 +71,12 @@ namespace HamibotRemoteControl.ViewModels
         private async Task UpdateSchemes()
         {
             var schemes = await _shortcutSchemeDb.GetAllSchemes();
+
+            if (schemes == null)
+            {
+                this.ShortcutSchemes = null;
+                return;
+            }
 
             foreach (var scheme in schemes)
             {
@@ -54,7 +89,7 @@ namespace HamibotRemoteControl.ViewModels
                 }
                 else
                 {
-                    scheme.Robots = await this._robotDb.GetRobotsByTags(scheme.Tags);
+                    scheme.Robots = await this._robotDb.GetRobotsByTags(scheme.Tags, scheme.IncludeHiddenRobot);
                 }
             }
 
