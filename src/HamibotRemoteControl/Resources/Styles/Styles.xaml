@@ -13,38 +13,6 @@
                 Value="{AppThemeBinding Light={StaticResource Foreground.Primary}, Dark={StaticResource Foreground.Primary}}" />
     </Style>
 
-
-    <Style TargetType="Button"
-           ApplyToDerivedTypes="True">
-        <Setter Property="Background"
-                Value="{StaticResource BackgroundColor.Secondary}" />
-        <Setter Property="CornerRadius"
-                Value="5" />
-        <Setter Property="FontSize"
-                Value="14" />
-        <Setter Property="Padding"
-                Value="0" />
-        <Setter Property="TextColor"
-                Value="{StaticResource Foreground.Primary}" />
-        <Setter Property="Shadow">
-            <Setter.Value>
-                <Shadow Brush="Black"
-                        Offset="10,10"
-                        Opacity="0.8" />
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger TargetType="Button"
-                     Property="IsEnabled"
-                     Value="False">
-                <Setter Property="Background"
-                        Value="{StaticResource BackgroundColor.Forbidden}" />
-            </Trigger>
-        </Style.Triggers>
-
-    </Style>
-
     <Style TargetType="Label">
         <Setter Property="TextColor"
                 Value="{StaticResource Foreground.Primary}" />

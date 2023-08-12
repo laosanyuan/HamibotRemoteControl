@@ -76,12 +76,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiImage Include="Resources\Icons\add.svg" />
+    <MauiImage Include="Resources\Icons\delete.svg" />
+    <MauiImage Include="Resources\Icons\edit.svg" />
+    <MauiImage Include="Resources\Icons\refresh.svg" />
     <MauiImage Include="Resources\Icons\about.png" />
     <MauiImage Include="Resources\Icons\data.png" />
     <MauiImage Include="Resources\Icons\robot.png" />
+    <MauiImage Include="Resources\Icons\run.svg" />
+    <MauiImage Include="Resources\Icons\scheme.png" />
     <MauiImage Include="Resources\Icons\script.png" />
     <MauiImage Include="Resources\Icons\set.png" />
     <MauiImage Include="Resources\Icons\home.png" />
+    <MauiImage Include="Resources\Icons\stop.svg" />
+    <MauiImage Include="Resources\Icons\top.svg" />
+    <MauiImage Include="Resources\Icons\top_banner.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,6 +103,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="Resources\Styles\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\AboutPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
