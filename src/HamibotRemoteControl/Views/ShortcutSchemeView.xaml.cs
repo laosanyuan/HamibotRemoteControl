@@ -20,11 +20,6 @@ public partial class ShortcutSchemeView : ContentPage
         WeakReferenceMessenger.Default.Send<object, string>(new object(), MessengerTokens.RefreshShortcutSchemes);
     }
 
-    private void Button_OnClicked(object sender, EventArgs e)
-    {
-        this.add_window.IsVisible = true;
-    }
-
     // 处理快捷方案卡片滑动
     private void SwipeGestureRecognizer_OnSwiped(object sender, SwipedEventArgs e)
     {

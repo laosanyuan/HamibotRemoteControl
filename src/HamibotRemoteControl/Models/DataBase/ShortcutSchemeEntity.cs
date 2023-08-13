@@ -6,9 +6,13 @@ namespace HamibotRemoteControl.Models.DataBase
     internal class ShortcutSchemeEntity
     {
         /// <summary>
-        /// 方案名称
+        /// id
         /// </summary>
         [PrimaryKey]
+        public string Id { get; set; }
+        /// <summary>
+        /// 方案名称
+        /// </summary>
         public string Name { get; set; }
         /// <summary>
         /// 获取机器人方式

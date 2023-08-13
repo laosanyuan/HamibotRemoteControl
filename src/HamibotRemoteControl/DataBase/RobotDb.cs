@@ -112,5 +112,30 @@ namespace HamibotRemoteControl.DataBase
             });
             return result;
         }
+
+        /// <summary>
+        /// 获取所有tag
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<string>> GetAllTags()
+        {
+            List<string> tags = new List<string>();
+            foreach (var robot in await _database.Table<RobotEntity>().ToListAsync())
+            {
+                if (!string.IsNullOrEmpty(robot.TagStr))
+                {
+                    var tmps = robot.TagStr.Split('#', StringSplitOptions.None);
+                    foreach (var tmp in tmps)
+                    {
+                        if (!tags.Contains(tmp))
+                        {
+                            tags.Add(tmp);
+                        }
+                    }
+                }
+            }
+
+            return tags;
+        }
     }
 }

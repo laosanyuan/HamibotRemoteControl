@@ -66,9 +66,11 @@
     <None Remove="Resources\AppIcon\appicon.svg" />
     <None Remove="Resources\Fonts\iconfont.ttf" />
     <None Remove="Resources\Icons\about.png" />
+    <None Remove="Resources\Icons\cancel.svg" />
     <None Remove="Resources\Icons\data.png" />
     <None Remove="Resources\Icons\home.png" />
     <None Remove="Resources\Icons\robot.png" />
+    <None Remove="Resources\Icons\save.svg" />
     <None Remove="Resources\Icons\script.png" />
     <None Remove="Resources\Icons\set.png" />
     <None Remove="Resources\logo.png" />
@@ -77,6 +79,7 @@
 
   <ItemGroup>
     <MauiImage Include="Resources\Icons\add.svg" />
+    <MauiImage Include="Resources\Icons\cancel.svg" />
     <MauiImage Include="Resources\Icons\delete.svg" />
     <MauiImage Include="Resources\Icons\edit.svg" />
     <MauiImage Include="Resources\Icons\refresh.svg" />
@@ -84,6 +87,7 @@
     <MauiImage Include="Resources\Icons\data.png" />
     <MauiImage Include="Resources\Icons\robot.png" />
     <MauiImage Include="Resources\Icons\run.svg" />
+    <MauiImage Include="Resources\Icons\save.svg" />
     <MauiImage Include="Resources\Icons\scheme.png" />
     <MauiImage Include="Resources\Icons\script.png" />
     <MauiImage Include="Resources\Icons\set.png" />
@@ -112,6 +116,9 @@
     <MauiXaml Update="Views\DataStatisticsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\EditSchemePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\RobotManagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -124,6 +131,10 @@
     <MauiXaml Update="Views\ShortcutSchemeView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>

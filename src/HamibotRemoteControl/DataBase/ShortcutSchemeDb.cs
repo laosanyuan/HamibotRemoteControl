@@ -52,6 +52,17 @@ namespace HamibotRemoteControl.DataBase
         }
 
         /// <summary>
+        /// 根据id获取快捷方案信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ShortcutSchemeModel> GetScheme(string id)
+        {
+            var tmp = await _database.Table<ShortcutSchemeEntity>().FirstOrDefaultAsync(t => t.Id.Equals(id));
+            return _mapper.Map<ShortcutSchemeModel>(tmp);
+        }
+
+        /// <summary>
         /// 更新快捷方案
         /// </summary>
         /// <param name="model"></param>
@@ -80,9 +91,9 @@ namespace HamibotRemoteControl.DataBase
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteScheme(string name)
+        public async Task<bool> DeleteScheme(string id)
         {
-            return await _database.DeleteAsync<ShortcutSchemeEntity>(name) > 0;
+            return await _database.DeleteAsync<ShortcutSchemeEntity>(id) > 0;
         }
     }
 }

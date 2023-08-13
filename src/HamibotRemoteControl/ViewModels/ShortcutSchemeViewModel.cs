@@ -24,6 +24,12 @@ namespace HamibotRemoteControl.ViewModels
         /// </summary>
         [ObservableProperty]
         private ObservableCollection<ShortcutSchemeModel> _shortcutSchemes;
+        /// <summary>
+        /// 正在被编辑方案
+        /// </summary>
+        [ObservableProperty]
+        private ShortcutSchemeModel _editingScheme;
+
         #endregion
 
         public ShortcutSchemeViewModel()
@@ -31,9 +37,9 @@ namespace HamibotRemoteControl.ViewModels
             WeakReferenceMessenger.Default.Register<object, string>(this,
                 MessengerTokens.RefreshShortcutSchemes, async (_, obj) => await this.UpdateSchemes());
 
-            this._shortcutSchemeDb = App.Container.Resolve<ShortcutSchemeDb>();
             this._scriptDb = App.Container.Resolve<ScriptDb>();
             this._robotDb = App.Container.Resolve<RobotDb>();
+            this._shortcutSchemeDb = App.Container.Resolve<ShortcutSchemeDb>();
         }
 
         #region [Icommands]
@@ -78,16 +84,6 @@ namespace HamibotRemoteControl.ViewModels
         }
 
         /// <summary>
-        /// 添加快捷方案
-        /// </summary>
-        /// <param name="scheme"></param>
-        [RelayCommand]
-        private async void AddScheme(ShortcutSchemeModel scheme)
-        {
-            await this._shortcutSchemeDb.InsertScheme(scheme);
-        }
-
-        /// <summary>
         /// 删除快捷方案
         /// </summary>
         /// <param name="scheme"></param>
@@ -101,9 +97,18 @@ namespace HamibotRemoteControl.ViewModels
                 "取消");
             if (isConfirmed)
             {
-                await this._shortcutSchemeDb.DeleteScheme(scheme.Name);
+                await this._shortcutSchemeDb.DeleteScheme(scheme.Id);
                 await UpdateSchemes();
             }
+        }
+
+        /// <summary>
+        /// 创建快捷方案
+        /// </summary>
+        [RelayCommand]
+        private async void CreateScheme()
+        {
+            await Shell.Current.GoToAsync($"///EditSchemePage?param={Uri.EscapeDataString("")}");
         }
 
         /// <summary>
@@ -111,9 +116,9 @@ namespace HamibotRemoteControl.ViewModels
         /// </summary>
         /// <param name="scheme"></param>
         [RelayCommand]
-        private void EditScheme(ShortcutSchemeModel scheme)
+        private async void EditScheme(ShortcutSchemeModel scheme)
         {
-
+            await Shell.Current.GoToAsync($"///EditSchemePage?param={Uri.EscapeDataString(scheme.Id)}");
         }
 
         /// <summary>
@@ -123,7 +128,7 @@ namespace HamibotRemoteControl.ViewModels
         [RelayCommand]
         private void TopScheme(ShortcutSchemeModel scheme)
         {
-
+            ToastHelper.Show("暂时还不支持置顶，敬请期待下个版本更新~");
         }
 
         #endregion

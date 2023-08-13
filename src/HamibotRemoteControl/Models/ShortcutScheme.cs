@@ -1,13 +1,16 @@
-﻿using HamibotRemoteControl.DataBase;
-using HamibotRemoteControl.Enums;
+﻿using HamibotRemoteControl.Enums;
 
 namespace HamibotRemoteControl.Models
 {
     /// <summary>
     /// 快捷方案数据
     /// </summary>
-    internal class ShortcutSchemeModel
+    internal partial class ShortcutSchemeModel
     {
+        /// <summary>
+        /// id
+        /// </summary>
+        public string Id { get; set; }
         /// <summary>
         /// 方案名称
         /// </summary>

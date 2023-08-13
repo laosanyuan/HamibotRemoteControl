@@ -64,4 +64,10 @@
                   Route="AboutPage"
                   Icon="Resources/Images/Icons/about.png" />
 
+
+    <ShellContent Title="编辑快捷方案"
+                  ContentTemplate="{DataTemplate views:EditSchemePage}"
+                  Route="EditSchemePage"
+                  FlyoutItemIsVisible="False" />
+
 </Shell>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HamibotRemoteControl.Views.EditSchemePage"
+             xmlns:local="clr-namespace:HamibotRemoteControl.Views"
+             xmlns:enum="clr-namespace:HamibotRemoteControl.Enums"
+             Title="编辑快捷方案"
+             BindingContext="{Binding Path=EditSchemePage, Source={StaticResource Locator}}"
+             Background="{StaticResource BackgroundColor.Primary}">
+    <ContentPage.Resources>
+        <local:SelectRobotTypeToStringConverter x:Key="SelectRobotTypeToStringConverter" />
+        <local:SelectRobotTypeToBooleanConverter x:Key="SelectRobotTypeToBooleanConverter" />
+    </ContentPage.Resources>
+    <Grid IsEnabled="{Binding CanEdit}"
+          Margin="0,40,0,20">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Padding="40,0">
+
+
+            <VerticalStackLayout Margin="15,0">
+                <Label Text="名称"
+                       FontSize="15" />
+                <Editor Text="{Binding Name}"
+                        MaxLength="20"
+                        FontSize="15"
+                        Placeholder="快捷方案名称"
+                        TextColor="{StaticResource Foreground.Primary}" />
+
+                <Label Text="执行脚本"
+                       FontSize="15"
+                       Margin="0,10,0,0" />
+                <Picker ItemsSource="{Binding Scripts}"
+                        SelectedItem="{Binding SelectedScript,Mode=TwoWay}"
+                        ItemDisplayBinding="{Binding Name}"
+                        TextColor="{StaticResource Foreground.Primary}"
+                        FontSize="15" />
+
+                <Label Text="选择执行方案机器人方式"
+                       Margin="0,10,0,0"
+                       FontSize="15" />
+                <Picker TextColor="{StaticResource Foreground.Primary}"
+                        SelectedItem="{Binding RobotType, Converter={StaticResource SelectRobotTypeToStringConverter},Mode=TwoWay}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>按机器人名称选择</x:String>
+                            <x:String>按Tag选择</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <!--tag选择-->
+                <VerticalStackLayout Margin="0,20,0,0"
+                                     IsVisible="{Binding RobotType, Converter={StaticResource SelectRobotTypeToBooleanConverter}, ConverterParameter={x:Static enum:SelectRobotType.Tag}}">
+                    <Label Text="请选择需要被操作的Tag："
+                           TextColor="{StaticResource Foreground.Primary}"
+                           Margin="0,0,0,15" />
+                    <CollectionView ItemsSource="{Binding Tags}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox IsChecked="{Binding IsSelected}" />
+                                    <Label Grid.Column="1"
+                                           VerticalTextAlignment="Center"
+                                           Text="{Binding Item}"
+                                           TextColor="{StaticResource Foreground.Primary}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!--机器人列表-->
+                <VerticalStackLayout Margin="0,20,0,0"
+                                     IsVisible="{Binding RobotType, Converter={StaticResource SelectRobotTypeToBooleanConverter}, ConverterParameter={x:Static enum:SelectRobotType.Name}}">
+                    <Label Text="请选择需要被操作的机器人："
+                           TextColor="{StaticResource Foreground.Primary}"
+                           Margin="0,0,0,15" />
+                    <CollectionView ItemsSource="{Binding Robots}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox IsChecked="{Binding IsSelected}" />
+                                    <Label Grid.Column="1"
+                                           VerticalTextAlignment="Center"
+                                           Text="{Binding Item.Name}"
+                                           TextColor="{StaticResource Foreground.Primary}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ImageButton Source="Resources/Images/Icons/cancel.svg"
+                         Background="{StaticResource FailColor}"
+                         Command="{Binding CancelCommand}" />
+            <ImageButton Source="Resources/Images/Icons/save.svg"
+                         Grid.Column="1"
+                         Background="{StaticResource SuccessColor}"
+                         Command="{Binding SaveCommand }" />
+        </Grid>
+    </Grid>
+</ContentPage>

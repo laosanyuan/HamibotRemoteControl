@@ -87,25 +87,13 @@
             </CollectionView>
         </ScrollView>
 
-        <!--添加方案弹窗-->
-        <Frame x:Name="add_window"
-               IsVisible="False"
-               Grid.RowSpan="2"
-               Margin="20,0,20,20"
-               CornerRadius="10"
-               Background="{StaticResource BackgroundColor.Tertiary}">
-            <Grid>
-
-            </Grid>
-        </Frame>
-
         <!--添加按钮-->
         <ImageButton Source="Resources/Images/Icons/add.svg"
-                     Clicked="Button_OnClicked"
-                     WidthRequest="60"
-                     HeightRequest="60"
-                     Padding="10"
+                     Command="{Binding CreateSchemeCommand}"
                      CornerRadius="25"
+                     WidthRequest="70"
+                     HeightRequest="70"
+                     Padding="10"
                      Grid.Row="1"
                      Margin="0,0,0,20" />
     </Grid>
