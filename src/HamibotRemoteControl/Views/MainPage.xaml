@@ -159,26 +159,34 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Text="运行"
-                        HeightRequest="40"
-                        WidthRequest="80"
-                        Background="{StaticResource SuccessColor}"
-                        Command="{Binding RunCommand}"
-                        IsEnabled="{Binding HaveSelectedRobot}" />
-                <Button Grid.Column="2"
-                        Text="停止"
-                        HeightRequest="40"
-                        WidthRequest="80"
-                        Padding="0"
-                        Background="{StaticResource FailColor}"
-                        Command="{Binding StopCommand}"
-                        IsEnabled="{Binding HaveSelectedRobot}" />
-                <Button Text="刷新数据"
-                        Grid.Column="1"
-                        IsVisible="{Binding IsAutoRefresh,Converter={StaticResource ReverseBooleanConverter}}"
-                        Command="{Binding RefreshCommand}"
-                        HeightRequest="40"
-                        WidthRequest="80" />
+
+                <ImageButton Source="Resources/Images/Icons/run.svg"
+                             Command="{Binding RunCommand}"
+                             Background="{StaticResource SuccessColor}"
+                             IsEnabled="{Binding HaveSelectedRobot}"
+                             CornerRadius="25"
+                             WidthRequest="70"
+                             HeightRequest="70"
+                             Padding="10"
+                             Margin="30,0,0,0" />
+                <ImageButton Source="Resources/Images/Icons/stop.svg"
+                             Grid.Column="2"
+                             Command="{Binding StopCommand}"
+                             Background="{StaticResource FailColor}"
+                             IsEnabled="{Binding HaveSelectedRobot}"
+                             CornerRadius="25"
+                             WidthRequest="70"
+                             HeightRequest="70"
+                             Padding="10"
+                             Margin="0,0,30,0" />
+                <ImageButton Source="Resources/Images/Icons/refresh.svg"
+                             Grid.Column="1"
+                             IsVisible="{Binding IsAutoRefresh,Converter={StaticResource ReverseBooleanConverter}}"
+                             Command="{Binding RefreshCommand}"
+                             CornerRadius="25"
+                             WidthRequest="70"
+                             HeightRequest="70"
+                             Padding="10" />
             </Grid>
         </Grid>
     </Grid>
