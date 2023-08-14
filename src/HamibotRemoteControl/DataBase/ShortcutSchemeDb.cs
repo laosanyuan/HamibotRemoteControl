@@ -89,7 +89,7 @@ namespace HamibotRemoteControl.DataBase
         /// <summary>
         /// 删除方案
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         public async Task<bool> DeleteScheme(string id)
         {
