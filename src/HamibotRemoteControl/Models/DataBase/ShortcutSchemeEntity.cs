@@ -34,5 +34,19 @@ namespace HamibotRemoteControl.Models.DataBase
         /// 机器人id列表，根据SelectRobotType.Name
         /// </summary>
         public string RobotIdsStr { get; set; }
+
+        public ShortcutSchemeModel ToShortSchemeModel()
+        {
+            return new ShortcutSchemeModel
+            {
+                Id = Id,
+                Name = Name,
+                SelectRobotType = SelectRobotType,
+                IncludeHiddenRobot = IncludeHiddenRobot,
+                ScriptId = ScriptId,
+                Tags = string.IsNullOrEmpty(TagsStr) ? null : TagsStr?.Split('#').ToList(),
+                RobotIds = string.IsNullOrEmpty(RobotIdsStr) ? null : RobotIdsStr?.Split('#').ToList()
+            };
+        }
     }
 }

@@ -1,19 +1,13 @@
 ﻿using HamibotRemoteControl.Models;
-using HamibotRemoteControl.Tools;
-using SQLite;
 using System.Collections.ObjectModel;
 
 namespace HamibotRemoteControl.DataBase
 {
-    internal class ScriptDb
+    internal class ScriptDb : BaseDb<Script>
     {
-        private readonly SQLiteAsyncConnection _database;
-
         public ScriptDb()
         {
-            var file = Path.Combine(AppPath.DataBaseFolder, "scripts.db");
-            _database = new SQLiteAsyncConnection(file);
-            _database.CreateTableAsync<Script>().Wait();
+            base._fileName = "scripts.db";
         }
 
         /// <summary>
@@ -22,6 +16,7 @@ namespace HamibotRemoteControl.DataBase
         /// <returns></returns>
         public async Task<List<Script>> GetAllScripts()
         {
+            await base.Init();
             return await _database.Table<Script>().ToListAsync();
         }
 
@@ -58,6 +53,7 @@ namespace HamibotRemoteControl.DataBase
         /// <returns></returns>
         public async Task<Script> GetScript(string id)
         {
+            await Init();
             return await _database.Table<Script>().FirstOrDefaultAsync(t => t.Id.Equals(id));
         }
     }

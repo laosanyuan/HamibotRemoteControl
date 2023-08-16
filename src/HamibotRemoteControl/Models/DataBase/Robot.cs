@@ -2,7 +2,7 @@
 
 namespace HamibotRemoteControl.Models.DataBase
 {
-    internal class RobotEntity
+    public class RobotEntity
     {
         [PrimaryKey]
         public string Id { get; set; }
@@ -38,5 +38,20 @@ namespace HamibotRemoteControl.Models.DataBase
         /// 是否被用户隐藏
         /// </summary>
         public bool IsHidden { get; set; }
+
+        public Robot ToRobot()
+        {
+            return new Robot
+            {
+                Id = Id,
+                Name = Name,
+                Online = Online,
+                Tags = string.IsNullOrEmpty(TagStr) ? null : TagStr?.Split("#")?.ToList(),
+                Brand = Brand,
+                Model = Model,
+                AppVersion = AppVersion,
+                IsHidden = IsHidden
+            };
+        }
     }
 }

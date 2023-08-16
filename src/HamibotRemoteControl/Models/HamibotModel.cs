@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using HamibotRemoteControl.Enums;
+using HamibotRemoteControl.Models.DataBase;
 using SQLite;
 using System.Text.Json.Serialization;
 
@@ -131,6 +132,21 @@ namespace HamibotRemoteControl.Models
         /// </summary>
 
         public bool IsHidden { get; set; }
+
+        public RobotEntity ToRobotEntity()
+        {
+            return new RobotEntity()
+            {
+                Id = Id,
+                Name = Name,
+                Online = Online,
+                TagStr = Tags is null ? null : string.Join("#", Tags),
+                Brand = Brand,
+                Model = Model,
+                AppVersion = AppVersion,
+                IsHidden = IsHidden,
+            };
+        }
     }
 
     /// <summary>

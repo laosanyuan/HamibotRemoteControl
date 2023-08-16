@@ -1,4 +1,5 @@
 ﻿using HamibotRemoteControl.Enums;
+using HamibotRemoteControl.Models.DataBase;
 
 namespace HamibotRemoteControl.Models
 {
@@ -71,6 +72,20 @@ namespace HamibotRemoteControl.Models
                 Name = name,
                 ScriptId = scriptId,
                 Tags = tags
+            };
+        }
+
+        public ShortcutSchemeEntity ToShortcutSchemeEntity()
+        {
+            return new ShortcutSchemeEntity()
+            {
+                Id = Id,
+                Name = Name,
+                ScriptId = ScriptId,
+                IncludeHiddenRobot = IncludeHiddenRobot,
+                SelectRobotType = SelectRobotType,
+                TagsStr = Tags is null ? null : string.Join("#", Tags),
+                RobotIdsStr = RobotIds is null ? null : string.Join("#", RobotIds),
             };
         }
     }
