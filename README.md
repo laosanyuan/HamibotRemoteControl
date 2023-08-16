@@ -51,6 +51,12 @@ Hamibot遥控器就是基于这个前提开发的供用户使用的可以通过a
 
 【快捷方案】功能是本项目自行添加，Hamibot官方并没有此类功能。添加这个功能的目的是为了可以根据常用使用配置快速调用。本功能相关配置信息只会保留在本地，无法根据账号在云端同步。
 
+<div style="width: 750px; overflow: hidden;">
+    <img src="images/scheme1.jpg" style="float: left; width: 250px;" />
+    <img src="images/scheme2.jpg" style="float: left; width: 250px;" />
+    <img src="images/scheme3.jpg" style="float: left; width: 250px;" />
+</div>
+
 【快捷方案】可以对选定的脚本配置需要使用的机器人，在使用时，直接运行快捷方案即可，不需要每次都去选择脚本和机器人。
 
 选择机器人的方式有根据机器人和根据Tag两种方式。如果选择根据机器人，则运行时被操作的就是被选中的机器人；如果选中的是根据Tag，则会选中选中Tag下的所有机器人。
