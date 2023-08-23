@@ -16,32 +16,39 @@
                             Margin="20,0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:ShortcutSchemeModel">
-                        <Grid>
-                            <HorizontalStackLayout HorizontalOptions="End"
-                                                   VerticalOptions="Center"
-                                                   Margin="0,0,0,15">
-                                <ImageButton Source="Resources/Images/Icons/top.svg"
-                                             CommandParameter="{Binding .}"
-                                             Command="{Binding BindingContext.TopSchemeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" />
-                                <ImageButton Source="Resources/Images/Icons/edit.svg"
-                                             CommandParameter="{Binding .}"
-                                             Command="{Binding BindingContext.EditSchemeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" />
-                                <ImageButton Source="Resources/Images/Icons/delete.svg"
-                                             CommandParameter="{Binding .}"
-                                             Command="{Binding BindingContext.DeleteSchemeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                             Background="{StaticResource FailColor}" />
-                            </HorizontalStackLayout>
+                        <!--SwipeView绑定command不成功-->
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItemView VerticalOptions="Center">
+                                    <ImageButton Source="Resources/Images/Icons/top.svg"
+                                                 Margin="5,0,0,0"
+                                                 HeightRequest="40"
+                                                 WidthRequest="40"
+                                                 Clicked="TopClicked"
+                                                 CommandParameter="{Binding .}" />
+                                </SwipeItemView>
+                                <SwipeItemView VerticalOptions="Center">
+                                    <ImageButton Source="Resources/Images/Icons/edit.svg"
+                                                 HeightRequest="40"
+                                                 WidthRequest="40"
+                                                 Clicked="EditClicked"
+                                                 CommandParameter="{Binding .}" />
+                                </SwipeItemView>
+                                <SwipeItemView VerticalOptions="Center">
+                                    <ImageButton Source="Resources/Images/Icons/delete.svg"
+                                                 Margin="5,0"
+                                                 HeightRequest="40"
+                                                 WidthRequest="40"
+                                                 Clicked="DeleteClicked"
+                                                 CommandParameter="{Binding .}"
+                                                 Background="{StaticResource FailColor}" />
+                                </SwipeItemView>
+                            </SwipeView.RightItems>
 
                             <Frame CornerRadius="5"
                                    Padding="20,5,20,10"
                                    Background="#363E51"
                                    Margin="0,0,0,15">
-                                <Frame.GestureRecognizers>
-                                    <SwipeGestureRecognizer Direction="Left"
-                                                            Swiped="SwipeGestureRecognizer_OnSwiped" />
-                                    <SwipeGestureRecognizer Direction="Right"
-                                                            Swiped="SwipeGestureRecognizer_OnSwiped" />
-                                </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
@@ -81,7 +88,7 @@
                                                  Command="{Binding BindingContext.StopSchemeCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" />
                                 </Grid>
                             </Frame>
-                        </Grid>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

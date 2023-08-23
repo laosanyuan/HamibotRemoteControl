@@ -76,12 +76,20 @@ namespace HamibotRemoteControl.ViewModels
         [RelayCommand]
         private async void Save()
         {
-            if (this.checkValid())
+            try
             {
-                await UpdateScheme();
-                // 通知状态变更
-                WeakReferenceMessenger.Default.Send(new object(), MessengerTokens.RefreshShortcutSchemes);
-                await this.Close();
+                if (this.CheckValid())
+                {
+                    await UpdateScheme();
+                    // 通知状态变更
+                    WeakReferenceMessenger.Default.Send(new object(), MessengerTokens.RefreshShortcutSchemes);
+                    await this.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ToastHelper.Show("保存失败：" + ex.Message);
             }
         }
 
@@ -205,7 +213,7 @@ namespace HamibotRemoteControl.ViewModels
         }
 
         // 检查编辑有效性
-        private bool checkValid()
+        private bool CheckValid()
         {
             if (string.IsNullOrEmpty(this.Name))
             {
