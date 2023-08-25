@@ -97,7 +97,7 @@
                                     <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Tags}"
                                                            Margin="0,10,0,0">
                                         <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="x:String">
                                                 <Grid Margin="0,0,5,0">
                                                     <Grid MaximumHeightRequest="12">
                                                         <Frame Margin="0"

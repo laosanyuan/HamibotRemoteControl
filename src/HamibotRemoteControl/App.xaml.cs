@@ -34,11 +34,11 @@ public partial class App : Application
 
     private async Task CheckVersion()
     {
-        // 开启三分钟后开始检查
-        await Task.Delay(1000 * 60 * 3);
+        // 开启1分钟后开始检查
+        await Task.Delay(1000 * 60 * 1);
         if (await Software.HaveNewVersion())
         {
-            await Device.InvokeOnMainThreadAsync(async () =>
+            await App.Current.Dispatcher.DispatchAsync(async () =>
             {
                 bool result = await App.Current.MainPage.DisplayAlert("有新版本", "发现作者已发布【Hamibot遥控器】新版本，是否下载新版本？", "去下载", "暂不处理");
 

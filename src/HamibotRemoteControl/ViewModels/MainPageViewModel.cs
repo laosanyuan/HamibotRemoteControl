@@ -110,7 +110,10 @@ namespace HamibotRemoteControl.ViewModels
             {
                 ToastHelper.Show("执行操作失败，请重试或检查API配额是否充足！");
             }
-
+            else
+            {
+                ToastHelper.Show("运行脚本成功");
+            }
             ClearSelected();
         }
 
@@ -132,6 +135,10 @@ namespace HamibotRemoteControl.ViewModels
             if (!await HamibotApi.OperateScript(this.SelectedScript.Id, selectedRobots, false, this.SelectedScript.Type))
             {
                 ToastHelper.Show("执行操作失败，请重试或检查API配额是否充足！");
+            }
+            else
+            {
+                ToastHelper.Show("停止脚本成功");
             }
 
             ClearSelected();
@@ -164,12 +171,14 @@ namespace HamibotRemoteControl.ViewModels
                 }
             }
 
+            bool isSuccess = true;
             if (robots != null)
             {
                 this.Robots = new ObservableCollection<Robot>(robots);
             }
             else
             {
+                isSuccess = false;
                 ToastHelper.Show("没有获取到有效机器人列表，请重试或者检查配置！");
             }
 
@@ -180,7 +189,13 @@ namespace HamibotRemoteControl.ViewModels
             }
             else
             {
+                isSuccess = false;
                 ToastHelper.Show("没有获取到有效脚本列表，请重试或者检查配置！");
+            }
+
+            if (isSuccess)
+            {
+                ToastHelper.Show("数据刷新完成");
             }
 
             await _scriptDb.UpdateRobots(this.Scripts);
