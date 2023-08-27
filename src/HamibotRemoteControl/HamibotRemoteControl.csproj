@@ -73,11 +73,12 @@
   <ItemGroup>
     <None Remove="Resources\AppIcon\appicon.png" />
     <None Remove="Resources\AppIcon\appicon.svg" />
-    <None Remove="Resources\Fonts\iconfont.ttf" />
     <None Remove="Resources\Icons\about.png" />
     <None Remove="Resources\Icons\cancel.svg" />
     <None Remove="Resources\Icons\data.png" />
     <None Remove="Resources\Icons\home.png" />
+    <None Remove="Resources\Icons\left.svg" />
+    <None Remove="Resources\Icons\right.svg" />
     <None Remove="Resources\Icons\robot.png" />
     <None Remove="Resources\Icons\save.svg" />
     <None Remove="Resources\Icons\script.png" />
@@ -103,15 +104,18 @@
     <MauiImage Include="Resources\Icons\home.png" />
     <MauiImage Include="Resources\Icons\stop.svg" />
     <MauiImage Include="Resources\Icons\top.svg" />
+    <MauiImage Include="Resources\Icons\left.svg" />
+    <MauiImage Include="Resources\Icons\right.svg" />
     <MauiImage Include="Resources\Icons\top_banner.svg" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="7.0.1" />
-    <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-beta.920" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
   </ItemGroup>
 
   <ItemGroup>

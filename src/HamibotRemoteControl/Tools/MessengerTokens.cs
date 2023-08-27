@@ -13,8 +13,8 @@
         public static string RefreshShortcutSchemes = "RefreshShortcutSchemes";
 
         /// <summary>
-        /// 完成快捷方案编辑
+        /// 刷新数据统计
         /// </summary>
-        public static string EditSchemeComplate = "EditSchemeComplate";
+        public static string RefreshDataStatisticPageData = "RefreshDataStatisticPageData";
     }
 }

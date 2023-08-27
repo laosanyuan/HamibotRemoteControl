@@ -40,17 +40,48 @@
                 Value="{StaticResource BackgroundColor.Secondary}" />
         <Setter Property="CornerRadius"
                 Value="20" />
-        <Setter Property="WidthRequest" Value="50"/>
-        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="WidthRequest"
+                Value="50" />
+        <Setter Property="HeightRequest"
+                Value="50" />
         <Setter Property="Padding"
                 Value="5" />
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow Brush="Black"
                         Offset="10,10"
-                        Opacity="0.8" />
+                        Opacity="0.5" />
             </Setter.Value>
         </Setter>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <Setter.Value>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale"
+                                        Value="0.95" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--透明背景样式-->
+    <Style x:Key="TransparentStyle"
+           TargetType="ImageButton"
+           ApplyToDerivedTypes="True">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="WidthRequest"
+                Value="50" />
+        <Setter Property="HeightRequest"
+                Value="50" />
+        <Setter Property="Padding"
+                Value="5" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <Setter.Value>
                 <VisualStateGroupList>

@@ -2,11 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HamibotRemoteControl.Views.DataStatisticsPage"
-             Title="DataStatisticsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:local="clr-namespace:HamibotRemoteControl.Views"
+             BindingContext="{Binding Source={StaticResource Locator},Path=DataStatisticsPage}"
+             Background="{StaticResource BackgroundColor.Primary}"
+             Title="数据统计">
+    <ContentPage.Resources>
+        <local:DataHistoryToStringConverter x:Key="DataHistoryToStringConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <!--顶部数据展示-->
+            <Grid Margin="10,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     VerticalOptions="Center">
+                    <Label Text="{Binding MonthCount}"
+                           FontSize="35"
+                           HorizontalOptions="Center" />
+                    <Label Text="本月调用次数"
+                           Margin="0,5,0,0"
+                           TextColor="{StaticResource Foreground.Secondary}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center">
+                    <Label Text="{Binding AverageCount}"
+                           FontSize="35"
+                           HorizontalOptions="Center" />
+                    <Label Text="平均每日调用次数"
+                           Margin="0,5,0,0"
+                           TextColor="{StaticResource Foreground.Secondary}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!--图表标题-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding HistoryType,Converter={StaticResource DataHistoryToStringConverter}}"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Column="1" />
+
+                <ImageButton Source="Resources/Images/Icons/left.svg"
+                             Style="{StaticResource TransparentStyle}"
+                             Command="{Binding LeftCommand}"
+                             Margin="10,0" />
+                <ImageButton Grid.Column="2"
+                             Source="Resources/Images/Icons/right.svg"
+                             Style="{StaticResource TransparentStyle}"
+                             Command="{Binding RightCommand}"
+                             Margin="10,0"
+                             Background="Transparent">
+                </ImageButton>
+            </Grid>
+
+            <!--图表-->
+            <lvc:CartesianChart HeightRequest="400"
+                                Series="{Binding Series}"
+                                XAxes="{Binding XAxes}"
+                                YAxes="{Binding YAxes}"
+                                AutoUpdateEnabled="True"
+                                TooltipPosition="Auto"
+                                ZoomMode="X">
+            </lvc:CartesianChart>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
