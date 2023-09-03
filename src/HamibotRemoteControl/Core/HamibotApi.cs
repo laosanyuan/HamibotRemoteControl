@@ -29,10 +29,10 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots";
-                await _apiCallCountDb.Insert(new ApiCallCount(url));
                 var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
+                    await _apiCallCountDb.Insert(new ApiCallCount(url));
                     return JsonSerializer.Deserialize<RobotCollection>(response.Json)?.Items;
                 }
             }
@@ -50,9 +50,12 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots/{id}";
-                await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
                 var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
-                return response is { IsSuccess: true };
+                if (response is { IsSuccess: true })
+                {
+                    await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
+                    return true;
+                }
             }
             return false;
         }
@@ -67,9 +70,12 @@ namespace HamibotRemoteControl.Core
             if (!string.IsNullOrEmpty(UserCenter.Instance.Token))
             {
                 var url = $"{BaseUrl}/v1/robots/{id}/stop";
-                await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
                 var response = await Client.SendRequest(url, HttpMethod.Put, UserCenter.Instance.Token);
-                return response is { IsSuccess: true };
+                if (response is { IsSuccess: true })
+                {
+                    await _apiCallCountDb.Insert(new ApiCallCount(url, ApiOperation.Put));
+                    return true;
+                }
             }
             return false;
         }
@@ -92,10 +98,10 @@ namespace HamibotRemoteControl.Core
                 };
                 var url = $"{BaseUrl}/v1/{parameter}";
 
-                await _apiCallCountDb.Insert(new ApiCallCount(url));
                 var response = await Client.SendRequest(url, HttpMethod.Get, UserCenter.Instance.Token);
                 if (response is { IsSuccess: true })
                 {
+                    await _apiCallCountDb.Insert(new ApiCallCount(url));
                     var result = JsonSerializer.Deserialize<ScriptCollection>(response.Json)?.Items;
                     if (type == ScriptType.Developer)
                     {
@@ -128,7 +134,6 @@ namespace HamibotRemoteControl.Core
                 var url = $"{BaseUrl}/v1/{tmpType}/{id}/run";
 
                 var parameters = new Dictionary<string, List<BaseRobot>> { { "robots", robots } };
-                await _apiCallCountDb.Insert(new ApiCallCount(url, run ? ApiOperation.Post : ApiOperation.Delete));
 
                 var response = await Client.SendRequest(
                     url,
@@ -136,7 +141,11 @@ namespace HamibotRemoteControl.Core
                     UserCenter.Instance.Token,
                     JsonSerializer.Serialize(parameters));
 
-                return response is { IsSuccess: true };
+                if (response is { IsSuccess: true })
+                {
+                    await _apiCallCountDb.Insert(new ApiCallCount(url, run ? ApiOperation.Post : ApiOperation.Delete));
+                    return true;
+                }
             }
             return false;
         }

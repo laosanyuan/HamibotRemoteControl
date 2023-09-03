@@ -46,7 +46,7 @@ namespace HamibotRemoteControl.Models
         /// </summary>
         public List<Robot> Robots { get; set; }
 
-
+        #region [Constructors]
         public static ShortcutSchemeModel CreateShortcutSchemeModelByRobot(
             string name,
             string scriptId,
@@ -88,5 +88,6 @@ namespace HamibotRemoteControl.Models
                 RobotIdsStr = RobotIds is null ? null : string.Join("#", RobotIds),
             };
         }
+        #endregion
     }
 }

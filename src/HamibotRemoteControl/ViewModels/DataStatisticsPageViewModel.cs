@@ -114,6 +114,7 @@ namespace HamibotRemoteControl.ViewModels
             this.InitChart();
         }
 
+        #region [Private Methods]
         private void InitChart()
         {
             this.YAxes = new List<Axis>()
@@ -199,5 +200,6 @@ namespace HamibotRemoteControl.ViewModels
             var month = await _db.GetCurrentMonthCounts();
             this.MonthCount = month.Sum(t => t.Count);
         }
+        #endregion
     }
 }

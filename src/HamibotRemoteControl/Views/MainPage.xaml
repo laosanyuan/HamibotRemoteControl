@@ -153,7 +153,7 @@
                     TextColor="{StaticResource Foreground.Primary}"
                     ItemDisplayBinding="{Binding Name}" />
             <Grid Grid.Row="1"
-                  Margin="0,0,0,20">
+                  Margin="50,0,50,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -167,8 +167,7 @@
                              CornerRadius="25"
                              WidthRequest="70"
                              HeightRequest="70"
-                             Padding="10"
-                             Margin="30,0,0,0" />
+                             Padding="10"/>
                 <ImageButton Source="Resources/Images/Icons/stop.svg"
                              Grid.Column="2"
                              Command="{Binding StopCommand}"
@@ -177,8 +176,7 @@
                              CornerRadius="25"
                              WidthRequest="70"
                              HeightRequest="70"
-                             Padding="10"
-                             Margin="0,0,30,0" />
+                             Padding="10" />
                 <ImageButton Source="Resources/Images/Icons/refresh.svg"
                              Grid.Column="1"
                              IsVisible="{Binding IsAutoRefresh,Converter={StaticResource ReverseBooleanConverter}}"

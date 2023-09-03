@@ -83,8 +83,7 @@ namespace HamibotRemoteControl.ViewModels
         public MainPageViewModel()
         {
             WeakReferenceMessenger.Default.Register<object, string>(this,
-                MessengerTokens.RefreshMainPageData,
-                (_, obj) => this.UpdateDisplayData());
+                MessengerTokens.RefreshMainPageData, async (_, obj) => await this.UpdateDisplayData());
 
             this._robotDb = App.Container.Resolve<RobotDb>();
             this._scriptDb = App.Container.Resolve<ScriptDb>();
@@ -92,7 +91,7 @@ namespace HamibotRemoteControl.ViewModels
 
         #region [Commands]
         [RelayCommand]
-        private async void Run()
+        private async Task Run()
         {
             if (this.SelectedScript == null)
             {
@@ -118,7 +117,7 @@ namespace HamibotRemoteControl.ViewModels
         }
 
         [RelayCommand]
-        private async void Stop()
+        private async Task Stop()
         {
             if (this.SelectedScript == null)
             {
@@ -148,7 +147,7 @@ namespace HamibotRemoteControl.ViewModels
         /// 刷新机器人、脚本列表
         /// </summary>
         [RelayCommand]
-        private async void Refresh()
+        private async Task Refresh()
         {
             // 对获取结果进行自然排序
             var robots = (await HamibotApi.GetRobotList())?.OrderBy(t => t.Name, new NaturalSortComparer());
@@ -205,7 +204,7 @@ namespace HamibotRemoteControl.ViewModels
 
         #region [Methods]
         // 更新显示数据
-        private async void UpdateDisplayData()
+        private async Task UpdateDisplayData()
         {
             if (SettingsManager.CurrentSettings == null)
             {
@@ -224,7 +223,7 @@ namespace HamibotRemoteControl.ViewModels
             // 自动刷新每次返回首页都会发起请求
             if (IsAutoRefresh)
             {
-                this.Refresh();
+                await this.Refresh();
             }
         }
 

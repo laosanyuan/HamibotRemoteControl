@@ -28,7 +28,7 @@ namespace HamibotRemoteControl.DataBase
         /// </summary>
         /// <param name="robots"></param>
         /// <returns></returns>
-        public async Task UpdateRobots(Collection<Robot> robots)
+        public async Task UpdateRobots(IList<Robot> robots)
         {
             var existingRobots = await GetAllRobots();
 

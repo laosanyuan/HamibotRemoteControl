@@ -1,5 +1,4 @@
 ﻿using HamibotRemoteControl.Models;
-using System.Collections.ObjectModel;
 
 namespace HamibotRemoteControl.DataBase
 {
@@ -25,7 +24,7 @@ namespace HamibotRemoteControl.DataBase
         /// </summary>
         /// <param name="scripts"></param>
         /// <returns></returns>
-        public async Task UpdateRobots(Collection<Script> scripts)
+        public async Task UpdateRobots(IList<Script> scripts)
         {
             var existingRobots = await GetAllScripts();
 
@@ -53,8 +52,16 @@ namespace HamibotRemoteControl.DataBase
         /// <returns></returns>
         public async Task<Script> GetScript(string id)
         {
-            await Init();
-            return await _database.Table<Script>().FirstOrDefaultAsync(t => t.Id.Equals(id));
+            try
+            {
+                await Init();
+                return await _database.Table<Script>().FirstOrDefaultAsync(t => t.Id.Equals(id));
+            }
+            catch (Exception ex)
+            {
+                // log
+                return null;
+            }
         }
     }
 }
