@@ -86,24 +86,19 @@
                        Margin="10,30" />
             </VerticalStackLayout>
 
-            <Grid Margin="20,20">
+            <Grid Margin="20,20"
+                  VerticalOptions="End">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Text="取消"
-                        HeightRequest="40"
-                        WidthRequest="80"
-                        HorizontalOptions="Center"
-                        VerticalOptions="End"
-                        Command="{Binding CancelCommand}" />
-                <Button Text="保存"
-                        Grid.Column="1"
-                        HeightRequest="40"
-                        WidthRequest="80"
-                        HorizontalOptions="Center"
-                        VerticalOptions="End"
-                        Command="{Binding SaveCommand}" />
+                <ImageButton Source="Resources/Images/Icons/cancel.svg"
+                             Background="{StaticResource FailColor}"
+                             Command="{Binding CancelCommand}" />
+                <ImageButton Source="Resources/Images/Icons/save.svg"
+                             Grid.Column="1"
+                             Background="{StaticResource SuccessColor}"
+                             Command="{Binding SaveCommand }" />
             </Grid>
         </Grid>
     </Grid>

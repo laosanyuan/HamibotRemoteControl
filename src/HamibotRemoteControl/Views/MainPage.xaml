@@ -11,6 +11,7 @@
         <converter:ReverseBooleanConverter x:Key="ReverseBooleanConverter" />
         <converter:CollectionIsEmptyConverter x:Key="CollectionIsEmptyConverter" />
     </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -144,13 +145,13 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Picker Title="选择脚本"
-                    TitleColor="{StaticResource Foreground.Primary}"
                     FontSize="20"
                     Margin="30,0,30,10"
                     HorizontalTextAlignment="Center"
                     ItemsSource="{Binding Scripts}"
                     SelectedItem="{Binding SelectedScript,Mode=TwoWay}"
                     TextColor="{StaticResource Foreground.Primary}"
+                    TitleColor="{StaticResource Foreground.Secondary}"
                     ItemDisplayBinding="{Binding Name}" />
             <Grid Grid.Row="1"
                   Margin="50,0,50,20">
@@ -167,7 +168,7 @@
                              CornerRadius="25"
                              WidthRequest="70"
                              HeightRequest="70"
-                             Padding="10"/>
+                             Padding="10" />
                 <ImageButton Source="Resources/Images/Icons/stop.svg"
                              Grid.Column="2"
                              Command="{Binding StopCommand}"
@@ -189,4 +190,4 @@
         </Grid>
     </Grid>
 
-</ContentPage>
+    </ContentPage>
