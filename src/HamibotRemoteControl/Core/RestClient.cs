@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using HamibotRemoteControl.Extensions;
+using HamibotRemoteControl.Common.Extensions;
 
 namespace HamibotRemoteControl.Core
 {

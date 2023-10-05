@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace HamibotRemoteControl.Extensions
+namespace HamibotRemoteControl.Common.Extensions
 {
     internal static class CollectionEx
     {

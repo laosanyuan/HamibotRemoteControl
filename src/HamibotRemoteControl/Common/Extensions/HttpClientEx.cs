@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
-namespace HamibotRemoteControl.Extensions
+namespace HamibotRemoteControl.Common.Extensions
 {
     internal static class HttpClientEx
     {
